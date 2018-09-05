@@ -32,7 +32,7 @@ public class TelaAddFornecedor extends javax.swing.JInternalFrame {
      */
     public TelaAddFornecedor() {
         initComponents();
-        setTitle("Cadastrar Fornecedor");
+        setTitle("Cadastrar Fornecedor ");
         setBounds(100, 100, 800, 600);
     }
 
