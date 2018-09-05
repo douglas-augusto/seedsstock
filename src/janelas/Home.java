@@ -29,11 +29,19 @@ public class Home extends javax.swing.JFrame {
    TelaAlterarSemente telaAltSemente = new TelaAlterarSemente();
    TelaApagarSemente telaDelSemente = new TelaApagarSemente();
    
+   TelaBuscarImprimir telaBuscSemente = new TelaBuscarImprimir();
+   TelaBalancos telaBalSemente = new TelaBalancos();
+    TelaGerirVendas telaGerVendas = new TelaGerirVendas();
+   
    
    private void fecharJanelas(){
        telaCadSemente.setVisible(false);
        telaAltSemente.setVisible(false);
        telaDelSemente.setVisible(false);
+       
+       telaBuscSemente.setVisible(false);
+       telaBalSemente.setVisible(false);
+       telaGerVendas.setVisible(false);
        
    }
   
@@ -466,16 +474,25 @@ public class Home extends javax.swing.JFrame {
 
     private void botaoBuscarSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarSementeMouseClicked
         // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaBuscSemente);
+        telaBuscSemente.setVisible(true);
+        telaBuscSemente.setPosition();
        
     }//GEN-LAST:event_botaoBuscarSementeMouseClicked
 
     private void botaoBalancosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBalancosMouseClicked
-        // TODO add your handling code here:
-       
+        fecharJanelas();
+        painelCentral.add(telaBalSemente);
+        telaBalSemente.setVisible(true);
+        telaBalSemente.setPosition();
     }//GEN-LAST:event_botaoBalancosMouseClicked
 
     private void botaoGerirVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGerirVendasMouseClicked
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaGerVendas);
+        telaGerVendas.setVisible(true);
+        telaGerVendas.setPosition();
         
     }//GEN-LAST:event_botaoGerirVendasMouseClicked
 
