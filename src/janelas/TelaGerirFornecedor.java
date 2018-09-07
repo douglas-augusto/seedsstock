@@ -5,18 +5,33 @@
  */
 package janelas;
 
+//import DAO.FornecedorDAO;
+//import DAO.SementeDAO;
+import classes.Fornecedor;
+import classes.Semente;
+//import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jframes.TesteTabela;
 
 /**
  *
  * @author Douglas
  */
 public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
+    
+    Fornecedor fornecedor = new Fornecedor();
+    PainelAlterarFornecedor telaAltFornecedor = new PainelAlterarFornecedor(fornecedor);
 
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
@@ -29,9 +44,16 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
      * Creates new form TelaGerirFornecedor
      */
     DefaultTableModel dtmFornecedor;
+    ArrayList<Fornecedor> arrayF_aux;
 
     public TelaGerirFornecedor() {
         initComponents();
+
+        try {
+            CarregaTabela("SELECT * FROM fornecedores ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         setTitle("Gerenciar Fornecedores");
 
@@ -91,6 +113,11 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Modify.png"))); // NOI18N
         jButton1.setText("Alterar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -182,21 +209,46 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
         //
-       
+        try {
+            CarregaTabela("SELECT * FROM fornecedores where nome LIKE '%" + jTextField1.getText() + "%' ORDER BY nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
 
-        
+        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arrayF_aux.get(jTable1.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
+        if (i == 0) {
+            
+            /*APÓS CRIAR O BANCO, EDITAR AQUI
+            FornecedorDAO fdao = new FornecedorDAO();
+
+            try {
+                boolean excluir = fdao.excluir(arrayF_aux.get(jTable1.getSelectedRow()).getIdfornecedor());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            
+            dtmFornecedor.removeRow(jTable1.getSelectedRow());
+            dtmFornecedor.fireTableDataChanged();
+
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        PainelAlterarFornecedor alterar = new PainelAlterarFornecedor(arrayF_aux.get(jTable1.getSelectedRow()));
+        alterar.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -210,6 +262,30 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-   
+    public void CarregaTabela(String sql) throws ClassNotFoundException {
+
+        String[] colunas = {"Id ", "Nome", "Telefone", "Email"};
+        String[] linha = new String[4];
+
+        dtmFornecedor = new DefaultTableModel(null, colunas);
+        
+        /*APÓS CRIAR O BANCO, EDITAR AQUI
+        FornecedorDAO f = new FornecedorDAO();
+
+        ArrayList<Fornecedor> array = (ArrayList<Fornecedor>) f.read(sql);
+
+        arrayF_aux = array;
+
+        for (int i = 0; i < array.size(); i++) {
+            linha[0] = Integer.toString(array.get(i).getIdfornecedor());
+            linha[1] = array.get(i).getNome();
+            linha[2] = array.get(i).getTelefone();
+            linha[3] = array.get(i).getEmail();
+            dtmFornecedor.addRow(linha);
+        }
+        */
+        jTable1.setModel(dtmFornecedor);
+        dtmFornecedor.fireTableDataChanged();
+    }
 
 }

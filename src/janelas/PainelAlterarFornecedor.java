@@ -5,7 +5,8 @@
  */
 package janelas;
 
-
+//import DAO.FornecedorDAO;
+import classes.Fornecedor;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,14 +22,18 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
      */
     int idFornecedor;
 
-    public PainelAlterarFornecedor() {
+    public PainelAlterarFornecedor(Fornecedor fornecedor) {
         initComponents();
+
+        carregarTextFields(fornecedor);
 
         setTitle("Alterar Fornecedores");
         setBounds(100, 100, 800, 600);
     }
 
-    
+    private PainelAlterarFornecedor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -322,6 +327,16 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        lerTextFields();
+
+        TelaGerirFornecedor gerir = new TelaGerirFornecedor();
+        
+        /*APÓS CRIAR O BANCO, EDITAR AQUI
+        try {
+            gerir.CarregaTabela("SELECT * FROM fornecedores ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
 
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -403,5 +418,57 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9f;
     // End of variables declaration//GEN-END:variables
 
+    public void carregarTextFields(Fornecedor f) {
+
+        idFornecedor = f.getIdfornecedor();
+
+        jTextField1f.setText(f.getNome());
+        jTextField3f.setText(f.getCnpj());
+        jTextField4f.setText(f.getRua());
+        jTextField5f.setText(Integer.toString(f.getNumero()));
+        jTextField6f.setText(f.getBairro());
+        jTextField7f.setText(f.getCep());
+        jTextField8f.setText(f.getCidade());
+        jTextField9f.setText(f.getEstado());
+        jTextField11f.setText(f.getTelefone());
+        jTextField12f.setText(f.getCelular());
+        jTextField10f.setText(f.getEmail());
+        jTextArea2f.setText(f.getObs());
+
+    }
+
+    public void lerTextFields() {
+        Fornecedor f = new Fornecedor();
+
+        f.setIdfornecedor(idFornecedor);
+
+        f.setNome(jTextField1f.getText());
+        f.setCnpj(jTextField3f.getText());
+        f.setRua(jTextField4f.getText());
+
+        try {
+            f.setNumero(Integer.parseInt(jTextField5f.getText()));
+        } catch (NumberFormatException ex) {
+            f.setNumero(0);
+        }
+
+        f.setBairro(jTextField6f.getText());
+        f.setCep(jTextField7f.getText());
+        f.setCidade(jTextField8f.getText());
+        f.setEstado(jTextField9f.getText());
+        f.setTelefone(jTextField11f.getText());
+        f.setCelular(jTextField12f.getText());
+        f.setEmail(jTextField10f.getText());
+        f.setObs(jTextArea2f.getText());
+        
+         /*APÓS CRIAR O BANCO, EDITAR AQUI
+        FornecedorDAO fdao = new FornecedorDAO();
+
+        try {
+            fdao.alterar(f);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }
 
 }

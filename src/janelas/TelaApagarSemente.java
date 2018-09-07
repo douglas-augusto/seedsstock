@@ -5,7 +5,9 @@
  */
 package janelas;
 
-
+//import DAO.SementeDAO;
+import classes.Semente;
+//import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -18,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import jframes.TesteTabela;
 
 /**
  *
@@ -36,10 +38,19 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaApagarSemente
      */
-   
+    DefaultTableModel dtmBusca;
+    ArrayList<Semente> arraySementes = new ArrayList();
 
     public TelaApagarSemente() {
         initComponents();
+
+        try {
+            carregaArray();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        carregaTabela();
+
         setTitle("Apagar Sementes");
         setBounds(100, 100, 800, 600);
     }
@@ -53,23 +64,318 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        botaoDeletarSemente = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
+        jLabel1.setText("Pesquisar:");
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
+        jButton1.setText("Apagar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        botaoDeletarSemente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        botaoDeletarSemente.setText("Fechar");
+        botaoDeletarSemente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDeletarSementeActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoDeletarSemente))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(botaoDeletarSemente))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoDeletarSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeletarSementeActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_botaoDeletarSementeActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        sorterTabelaBusca();
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER " + arraySementes.get(jTable1.getSelectedRow()).getNome() + " do Sistema?", "Excluir", JOptionPane.OK_OPTION);
+        if (i == 0) {
+            
+            /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+            SementeDAO sdao = new SementeDAO();
+            try {
+                sdao.excluir(arraySementes.get(jTable1.getSelectedRow()).getIdsemente());
+                dtmBusca.removeRow(jTable1.getSelectedRow());
+                dtmBusca.fireTableDataChanged();
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaApagarSemente.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+    }//GEN-LAST:event_jButton1ActionPerformed
+    else {
+            System.out.println(i);
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoDeletarSemente;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    
+    public void carregaArray() throws ClassNotFoundException {
+        //Connection con = MakeConnection.getConnection(); /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        PreparedStatement stmt = null;
 
+        ResultSet rs = null;
+
+        int cont = 0;
+
+        // sementeDAO sDao = new sementeDAO();
+        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
+            rs = stmt.executeQuery();
+
+            arraySementes.clear();
+            while (rs.next()) {
+                /////////////////////////////////
+                Semente semente = new Semente();
+                ///////////////////////////////////
+                semente.setIdsemente(rs.getInt("idsemente"));
+                semente.setNome(rs.getString("nome"));
+                semente.setEspecie(rs.getString("especie"));
+                semente.setQuant(rs.getInt("quant"));
+                semente.setRaridade(rs.getString("raridade"));
+                semente.setDia_col(rs.getInt("dia_col"));
+                semente.setMes_col(rs.getInt("mes_col"));
+                semente.setAno_col(rs.getInt("ano_col"));
+                semente.setDia_val(rs.getInt("dia_val"));
+                semente.setMes_val(rs.getInt("mes_val"));
+                semente.setAno_val(rs.getInt("ano_val"));
+
+                semente.setPreco_compra(rs.getFloat("preco_compra"));
+                semente.setPreco_venda(rs.getFloat("preco_venda"));
+
+                semente.setOrigem(rs.getString("origem"));
+                semente.setFornecedor(rs.getString("fornecedor"));
+                semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
+                semente.setObservacoes(rs.getString("observacoes"));
+
+                arraySementes.add(semente);
+
+                //Preenchendo tabela
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt, rs);
+        }*/
+        // return arraySementes;
+    }
+
+    public void carregaTabela() {
+        
+
+        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Venda", "Preço Compra"};
+        String[] linha = new String[5];
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        //String sql = "SELECT * FROM sementes";
+        String sql = "SELECT * FROM sementes ORDER BY nome ASC";
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        Connection con = null;
+        
+        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        try {
+            con = MakeConnection.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Statement stmt;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                linha[0] = rs.getString("idsemente");
+                linha[1] = rs.getString("nome");
+                linha[2] = rs.getString("especie");
+                linha[3] = rs.getString("preco_compra");
+                linha[4] = rs.getString("preco_venda");
+                dtmBusca.addRow(linha);
+            }
+            jTable1.setModel(dtmBusca);
+            dtmBusca.fireTableDataChanged();
+        } catch (SQLException ex) {
+            //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+    }
+
+    public void carregaArraySorter() throws ClassNotFoundException {
+        //Connection con = MakeConnection.getConnection();/*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        int cont = 0;
+        //List<Pessoa> pessoasSql = new ArrayList<>();
+        
+        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        SementeDAO sDao = new SementeDAO();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM sementes where nome LIKE '%" + jTextField1.getText() + "%' ORDER BY nome ASC");
+            rs = stmt.executeQuery();
+
+            arraySementes.clear();
+            while (rs.next()) {
+                /////////////////////////////////
+                Semente semente = new Semente();
+                ///////////////////////////////////
+                semente.setIdsemente(rs.getInt("idsemente"));
+                semente.setNome(rs.getString("nome"));
+                semente.setEspecie(rs.getString("especie"));
+                semente.setQuant(rs.getInt("quant"));
+                semente.setRaridade(rs.getString("raridade"));
+                semente.setDia_col(rs.getInt("dia_col"));
+                semente.setMes_col(rs.getInt("mes_col"));
+                semente.setAno_col(rs.getInt("ano_col"));
+                semente.setDia_val(rs.getInt("dia_val"));
+                semente.setMes_val(rs.getInt("mes_val"));
+                semente.setAno_val(rs.getInt("ano_val"));
+
+                semente.setPreco_compra(rs.getFloat("preco_compra"));
+                semente.setPreco_venda(rs.getFloat("preco_venda"));
+
+                semente.setOrigem(rs.getString("origem"));
+                semente.setFornecedor(rs.getString("fornecedor"));
+                semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
+                semente.setObservacoes(rs.getString("observacoes"));
+
+                arraySementes.add(semente);
+
+                //Preenchendo tabela
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt, rs);
+        }*/
+        // return arraySementes;
+    }
+
+    public void sorterTabelaBusca() {
+
+        try {
+            carregaArraySorter();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        DefaultTableModel dtmBusca;
+
+        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Venda", "Preço Compra"};
+        String[] linha = new String[5];
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+        for (int i = 0; i < arraySementes.size(); i++) {
+            linha[0] = Integer.toString(arraySementes.get(i).getIdsemente());
+            linha[1] = arraySementes.get(i).getNome();
+            linha[2] = arraySementes.get(i).getEspecie();
+            linha[3] = Float.toString(arraySementes.get(i).getPreco_compra());
+            linha[4] = Float.toString(arraySementes.get(i).getPreco_venda());
+            dtmBusca.addRow(linha);
+        }
+        jTable1.setModel(dtmBusca);
+        dtmBusca.fireTableDataChanged();
+
+    }
+
+}

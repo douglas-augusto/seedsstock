@@ -31,7 +31,9 @@ public class Home extends javax.swing.JFrame {
    
    TelaBuscarImprimir telaBuscSemente = new TelaBuscarImprimir();
    TelaBalancos telaBalSemente = new TelaBalancos();
-    TelaGerirVendas telaGerVendas = new TelaGerirVendas();
+   TelaGerirVendas telaGerVendas = new TelaGerirVendas();
+    
+   TelaGerirFornecedor telaGerFornecedor = new TelaGerirFornecedor();
    
    
    private void fecharJanelas(){
@@ -42,6 +44,8 @@ public class Home extends javax.swing.JFrame {
        telaBuscSemente.setVisible(false);
        telaBalSemente.setVisible(false);
        telaGerVendas.setVisible(false);
+       
+       telaGerFornecedor.setVisible(false);
        
    }
   
@@ -503,6 +507,10 @@ public class Home extends javax.swing.JFrame {
 
     private void botaoGerirFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGerirFornecedorMouseClicked
         // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaGerFornecedor);
+        telaGerFornecedor.setVisible(true);
+        telaGerFornecedor.setPosition();
        
     }//GEN-LAST:event_botaoGerirFornecedorMouseClicked
 
