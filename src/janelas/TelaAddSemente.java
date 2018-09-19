@@ -6,6 +6,7 @@
 package janelas;
 
 //import DAO.SementeDAO;
+import DAO.SementeDAO;
 import classes.Semente;
 import classes.teclasPermitidas;
 //import conection.MakeConnection;
@@ -71,11 +72,7 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         jTextField8.setDocument(new teclasPermitidas("[^0-9 | ^.]", ""));
          
          // Carrega Choice Fornecedor
-        try {
-            carregaChoiceFornecedor();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         
         setBounds(100, 100, 800, 600);
         
@@ -589,7 +586,6 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
 
         System.out.println("teste ");
         
-        /*QUANDO O BANCO TIVER FEITO, EDITAR AQUI
         SementeDAO dao = new SementeDAO();
         try {
             dao.salvar(s);
@@ -598,7 +594,7 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
             Logger.getLogger(AddSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AddSemente.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     public void limpaTextFields() {
@@ -616,38 +612,6 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         
     }  
     
-    public void carregaChoiceFornecedor() throws ClassNotFoundException{
-        
-      
-        
-        //Connection con = MakeConnection.getConnection(); /*QUANDO O BANCO TIVER FEITO, EDITAR AQUI
-        PreparedStatement stmt = null;
-        
-        ResultSet rs = null;
-        
-        
-        //List<Pessoa> pessoasSql = new ArrayList<>();
-        
-        /*QUANDO O BANCO TIVER FEITO, EDITAR AQUI
-        try {
-            stmt = con.prepareStatement("SELECT * FROM fornecedores");
-            rs = stmt.executeQuery();
-            
-            while(rs.next()){
-               /////////////////////////////////
-               choice1.add(rs.getString("nome"));
-                   
-            }
-            
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            MakeConnection.closeConnection(con, stmt, rs);
-        }*/
-    
-    }
     
     
 }
