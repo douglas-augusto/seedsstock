@@ -5,9 +5,9 @@
  */
 package janelas;
 
-//import DAO.SementeDAO;
+import DAO.SementeDAO;
 import classes.Semente;
-//import conection.MakeConnection;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -23,7 +23,7 @@ import jframes.TesteTabela;
 
 /**
  *
- * @author Douglas
+ * @author Renan
  */
 public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     
@@ -40,7 +40,7 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     
     DefaultTableModel dtmBusca;
     ArrayList<Semente> arraySementesAlterar = new ArrayList();
-   // PainelAlterar painelAlterar = new PainelAlterar();
+    //PainelAlterar painelAlterar = new PainelAlterar();
         
     public TelaAlterarSemente() {
         initComponents();
@@ -152,8 +152,8 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botaoFecharAlterar)
                     .addComponent(jButton1))
@@ -175,9 +175,8 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-      /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
       PainelAlterar alt = new PainelAlterar(arraySementesAlterar.get(jTable1.getSelectedRow()));
-      alt.setVisible(true);*/
+      alt.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -192,16 +191,16 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
  public void carregaArray() throws ClassNotFoundException {
-        //Connection con = MakeConnection.getConnection(); /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        Connection con = MakeConnection.getConnection(); 
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
 
         int cont = 0;
        
-       // sementeDAO sDao = new sementeDAO();
+        //sementeDAO sDao = new sementeDAO();
        
-       /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+       
         try {
             stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
             rs = stmt.executeQuery();
@@ -240,8 +239,7 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
             Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             MakeConnection.closeConnection(con, stmt, rs);
-        }*/
-        // return arraySementesAlterar;
+        }
     }
  
  public void carregaTabela() {
@@ -259,7 +257,6 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
 
         Connection con = null;
         
-        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
         try {
             con = MakeConnection.getConnection();
         } catch (ClassNotFoundException ex) {
@@ -283,12 +280,12 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
             dtmBusca.fireTableDataChanged();
         } catch (SQLException ex) {
             //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
 
     }
  
  public void carregaArraySorter() throws ClassNotFoundException {
-        //Connection con = MakeConnection.getConnection(); /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        Connection con = MakeConnection.getConnection(); 
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
@@ -296,7 +293,7 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
         int cont = 0;
         //List<Pessoa> pessoasSql = new ArrayList<>();
         
-        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        
         SementeDAO sDao = new SementeDAO();
         try {
             stmt = con.prepareStatement("SELECT * FROM sementes where nome LIKE '%" + jTextField1.getText() + "%' ORDER BY nome ASC");
@@ -336,8 +333,8 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
             Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             MakeConnection.closeConnection(con, stmt, rs);
-        }*/
-        // return arraySementesAlterar;
+        }
+         //return arraySementesAlterar;
     }
  
  public void sorterTabelaBusca() {
