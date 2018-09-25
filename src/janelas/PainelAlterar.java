@@ -17,7 +17,7 @@ import javax.swing.ButtonGroup;
 
 /**
  *
- * @author Renan
+ * @author douglas
  */
 public class PainelAlterar extends javax.swing.JFrame {
 
@@ -403,10 +403,8 @@ public class PainelAlterar extends javax.swing.JFrame {
     }//GEN-LAST:event_radioAActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        lerTextFields();
-
+   
+        lerTextFields();       
         dispose();
         // limpaTextFields();
         // TelaAlterarSemente tabela = new TelaAlterarSemente();
@@ -547,7 +545,7 @@ public class PainelAlterar extends javax.swing.JFrame {
 
     }
 
-    public void lerTextFields() {
+    public void lerTextFields(){
         Semente s = new Semente();
 
         s.setIdsemente(idSemente);
@@ -627,7 +625,7 @@ public class PainelAlterar extends javax.swing.JFrame {
         System.out.println("teste ");
 
         SementeDAO dao = new SementeDAO();
-
+        
         try {
             dao.Alterar(s);
         } catch (ClassNotFoundException ex) {

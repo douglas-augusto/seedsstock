@@ -27,7 +27,7 @@ import jframes.TesteTabela;
  */
 public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     
-    Toolkit tk = Toolkit.getDefaultToolkit();
+     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
 
     public void setPosition() {
@@ -40,7 +40,7 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     
     DefaultTableModel dtmBusca;
     ArrayList<Semente> arraySementesAlterar = new ArrayList();
-    //PainelAlterar painelAlterar = new PainelAlterar();
+   // PainelAlterar painelAlterar = new PainelAlterar();
         
     public TelaAlterarSemente() {
         initComponents();
@@ -191,16 +191,14 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
  public void carregaArray() throws ClassNotFoundException {
-        Connection con = MakeConnection.getConnection(); 
+        Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
 
         int cont = 0;
        
-        //sementeDAO sDao = new sementeDAO();
-       
-       
+       // sementeDAO sDao = new sementeDAO();
         try {
             stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
             rs = stmt.executeQuery();
@@ -256,7 +254,6 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
         dtmBusca = new DefaultTableModel(null, colunas);
 
         Connection con = null;
-        
         try {
             con = MakeConnection.getConnection();
         } catch (ClassNotFoundException ex) {
@@ -285,15 +282,13 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
     }
  
  public void carregaArraySorter() throws ClassNotFoundException {
-        Connection con = MakeConnection.getConnection(); 
+        Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
 
         int cont = 0;
         //List<Pessoa> pessoasSql = new ArrayList<>();
-        
-        
         SementeDAO sDao = new SementeDAO();
         try {
             stmt = con.prepareStatement("SELECT * FROM sementes where nome LIKE '%" + jTextField1.getText() + "%' ORDER BY nome ASC");
@@ -334,7 +329,6 @@ public class TelaAlterarSemente extends javax.swing.JInternalFrame {
         } finally {
             MakeConnection.closeConnection(con, stmt, rs);
         }
-         //return arraySementesAlterar;
     }
  
  public void sorterTabelaBusca() {

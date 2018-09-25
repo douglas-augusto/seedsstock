@@ -5,6 +5,8 @@
  */
 package classes;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ramyllo
@@ -131,5 +133,41 @@ public class Semente {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+        
+        public boolean validarSemente(){
+        return validaNomeSemente() && validaPrecoCompra() && validaPrecoVenda() && validaQtdSemente();
+    }
+    
+    public boolean validaNomeSemente(){
+        if(nome.length()<4 || nome.length()>20){
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }         
+        return true;
+    }
+    
+    public boolean validaPrecoCompra(){
+        if(preco_compra <= 0){
+            //JOptionPane.showMessageDialog(null, "O preço de compra deve ser maior que 0!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaPrecoVenda(){
+        if(preco_venda <= 0 || preco_venda <= preco_compra){
+            //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaQtdSemente(){
+        if(quant < 0){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 	
 }

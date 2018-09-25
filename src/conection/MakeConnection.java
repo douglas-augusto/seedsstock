@@ -13,7 +13,7 @@ public class MakeConnection {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost/banco_sementes"; // jdbc://localhost:3306/  |    jdbc:mysql://localhost/bdtweets2
     private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String PASS = "root";
 
     public static Connection getConnection() throws ClassNotFoundException {
 

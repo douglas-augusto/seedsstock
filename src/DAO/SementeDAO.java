@@ -6,6 +6,7 @@
 package DAO;
 
 import classes.Semente;
+import static com.sun.glass.ui.Cursor.setVisible;
 import conection.MakeConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -149,9 +150,9 @@ public class SementeDAO {
             stmt.setString(16, s.getObservacoes());
 
             stmt.setInt(17, s.getIdsemente());
-
+            
             stmt.executeUpdate();
-
+            
             JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
 
         } catch (SQLException ex) {
