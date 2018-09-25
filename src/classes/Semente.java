@@ -146,6 +146,14 @@ public class Semente {
         return true;
     }
     
+    public boolean validaEspecieSemente(){
+        if(especie.length()<4 || especie.length()>20){
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }         
+        return true;
+    }
+    
     public boolean validaPrecoCompra(){
         if(preco_compra <= 0){
             //JOptionPane.showMessageDialog(null, "O preço de compra deve ser maior que 0!", "Erro:", JOptionPane.ERROR_MESSAGE);
@@ -161,9 +169,59 @@ public class Semente {
         }
         return true;
     }
+    public boolean validaRaridade(){
+        if(raridade != "A"  || raridade != "B" || raridade != "C" || raridade != "D"){
+            //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
     
     public boolean validaQtdSemente(){
         if(quant < 0){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaDiaColSemente(){
+        if(dia_col < 1 || dia_col > 31){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    public boolean validaMesColSemente(){
+        if(mes_col < 1 || mes_col > 12){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    public boolean validaAnoColSemente(){
+        if(ano_col < 1 || ano_col > 2018){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    public boolean validaDiaValSemente(){
+        if(dia_val < 1 || dia_val > 31){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    public boolean validaMesValSemente(){
+        if(mes_col < 1 || mes_col > 12){
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    public boolean validaAnoValSemente(){
+        if(ano_val < ano_col ){
             //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }

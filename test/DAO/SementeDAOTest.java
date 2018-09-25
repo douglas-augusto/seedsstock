@@ -45,10 +45,9 @@ public class SementeDAOTest {
         
 
         SementeDAO sd = new SementeDAO();
-
-        //fail("O caso de teste é um protótipo.");
         if(sd.salvar(s)){
             assertTrue("Deve retornar TRUE", true);
+            //fazer alterações colocando o valida
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
@@ -89,10 +88,10 @@ public class SementeDAOTest {
     @Test
     public void testAlterarSementeNome() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
-        SementeDAO sd = new SementeDAO();;
-        s.setNome("abc");
+        SementeDAO sd = new SementeDAO();
+        s.setNome("abcde");
         if(sd.Alterar(s)){
-            assertTrue("Deve retornar TRUE", true);
+            assertTrue("Deve retornar TRUE", s.validaNomeSemente());
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
@@ -101,10 +100,10 @@ public class SementeDAOTest {
     @Test
     public void testAlterarSementeEspecie() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
-        SementeDAO sd = new SementeDAO();;
-        s.setEspecie("abc");
+        SementeDAO sd = new SementeDAO();
+        s.setEspecie("abcde");
         if(sd.Alterar(s)){
-            assertTrue("Deve retornar TRUE", true);
+            assertTrue("Deve retornar TRUE", s.validaEspecieSemente());
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
@@ -113,10 +112,10 @@ public class SementeDAOTest {
     @Test
     public void testAlterarSementeQtd() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
-        SementeDAO sd = new SementeDAO();;
+        SementeDAO sd = new SementeDAO();
         s.setQuant(1);
         if(sd.Alterar(s)){
-            assertTrue("Deve retornar TRUE", true);
+            assertTrue("Deve retornar TRUE", s.validaQtdSemente());
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
@@ -124,8 +123,30 @@ public class SementeDAOTest {
     }
     public void testAlterarSementeRaridade() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
-        SementeDAO sd = new SementeDAO();;
-        s.setRaridade("D");
+        SementeDAO sd = new SementeDAO();
+        s.setRaridade("B");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", s.validaRaridade());
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    public void testAlterarSementeDiaColheita() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setDia_col(4);
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    public void testAlterarSementeMesColheita() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setMes_col(0);
         if(sd.Alterar(s)){
             assertTrue("Deve retornar TRUE", true);
             System.out.println("Teste passou!");
