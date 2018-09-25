@@ -438,7 +438,7 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         lerTextFields();
       
        
-       // limpaTextFields();
+        limpaTextFields();
        
       
         dispose();

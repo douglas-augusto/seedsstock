@@ -9,6 +9,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import classes.Semente;
 import DAO.SementeDAO;
+import com.sun.org.apache.xpath.internal.operations.Equals;
+import conection.MakeConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,7 +29,7 @@ public class SementeDAOTest {
     public void testCadastraSemente() throws ClassNotFoundException, SQLException {
         Semente s = new Semente();
         
-        /*
+        
         s.setNome("teste");
         s.setEspecie("Teste");
         s.setQuant(1);
@@ -37,36 +42,96 @@ public class SementeDAOTest {
         s.setAno_val(1111);
         s.setPreco_compra(15);
         s.setPreco_venda(16);
-        */
+        
 
         SementeDAO sd = new SementeDAO();
 
         //fail("O caso de teste é um protótipo.");
         if(sd.salvar(s)){
+            assertTrue("Deve retornar TRUE", true);
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
         }
         
         //sd.excluir(s.getIdsemente());
-    }
+    
+        }
     @Test
     public void testExcluirSemente() throws ClassNotFoundException, SQLException{
-        /*Semente s = new Semente();
-        SementeDAO sd = new SementeDAO();
-        s.setIdsemente(sd.selecionaUltimo());
-        if(sd.excluir(s.getIdsemente())){
-            System.out.println("Teste passou!");
-        }else{
-            fail("O caso de teste é um protótipo.");
-        }*/
+        
+        /*Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        rs = stmt.executeQuery();*/
+
+        
         Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
-        if(sd.excluir(s.getIdsemente())){
+        if(sd.excluir(sd.getLastId())){
+            assertTrue("Deve retornar TRUE", true);
             System.out.println("Teste passou!");
         }else{
             fail("Teste Não passou.");
         }
+    }
+    @Test
+    public void testAlterarSemente() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    @Test
+    public void testAlterarSementeNome() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();;
+        s.setNome("abc");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    @Test
+    public void testAlterarSementeEspecie() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();;
+        s.setEspecie("abc");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    @Test
+    public void testAlterarSementeQtd() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();;
+        s.setQuant(1);
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
+    }
+    public void testAlterarSementeRaridade() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();;
+        s.setRaridade("D");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", true);
+            System.out.println("Teste passou!");
+        }else{
+            fail("Teste Não passou.");
+        } 
     }
     
 }

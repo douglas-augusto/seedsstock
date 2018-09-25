@@ -30,7 +30,7 @@ public class SementeDAO {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        boolean result;
+        boolean result = false;
 
         try {
             stmt = con.prepareStatement(
@@ -76,9 +76,10 @@ public class SementeDAO {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-
+        
         ResultSet rs = null;
-
+        
+        //boolean result = false;
         //List<Pessoa> pessoasSql = new ArrayList<>();
         try {
             stmt = con.prepareStatement(sql);
@@ -120,10 +121,11 @@ public class SementeDAO {
         return arraySementes;
     }
 
-    public void Alterar(Semente s) throws ClassNotFoundException, SQLException {
+    public boolean Alterar(Semente s) throws ClassNotFoundException, SQLException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
+        boolean result = false;
 
         try {
             stmt = con.prepareStatement(
@@ -154,25 +156,30 @@ public class SementeDAO {
             stmt.setInt(17, s.getIdsemente());
             
             stmt.executeUpdate();
-            
+            result = true;
             JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
+            result = false;
             System.out.println(ex);
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-
+        return result;
     }
 
-    public boolean excluir(int id) throws ClassNotFoundException {
+    public boolean excluir(int id) throws ClassNotFoundException, SQLException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        boolean result;
+        PreparedStatement stmts = null;
+        boolean result = false;
+        //stmt.executeUpdate();
+
 
         try {
+            
             stmt = con.prepareStatement("DELETE FROM sementes WHERE idsemente = ?");
 
             /////////////////////////////////
@@ -195,5 +202,20 @@ public class SementeDAO {
     public void read() throws ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
+    public int getLastId() throws SQLException, ClassNotFoundException{
+        //String sql = "SELECT MAX(idsemente) as idsemente FROM sementes";
+        String sql = "SELECT * FROM sementes ORDER BY idsemente DESC LIMIT 1";
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = (PreparedStatement) con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        int lastId = rs.getInt("idsemente");
+
+	rs.close();
+	stmt.close();
+
+	return lastId;
+}
 }
