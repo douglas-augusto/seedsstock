@@ -26,10 +26,11 @@ public class SementeDAO {
 
     public ArrayList<Semente> arraySementes = new ArrayList();
 
-    public void salvar(Semente s) throws ClassNotFoundException, SQLException {
+    public boolean salvar(Semente s) throws ClassNotFoundException, SQLException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
+        boolean result;
 
         try {
             stmt = con.prepareStatement(
@@ -59,14 +60,15 @@ public class SementeDAO {
             stmt.setString(16, s.getObservacoes());
 
             stmt.executeUpdate();
-
+            result = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar: " + ex);
             System.out.println(ex);
+           result = false; 
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-
+        return result;
     }
 
     //List<Semente>
@@ -164,10 +166,11 @@ public class SementeDAO {
 
     }
 
-    public void excluir(int id) throws ClassNotFoundException {
+    public boolean excluir(int id) throws ClassNotFoundException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
+        boolean result;
 
         try {
             stmt = con.prepareStatement("DELETE FROM sementes WHERE idsemente = ?");
@@ -178,13 +181,15 @@ public class SementeDAO {
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-
+            result = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir dao: " + ex);
             System.out.println(ex);
+            result = false;
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
+        return result;
     }
 
     public void read() throws ClassNotFoundException {
