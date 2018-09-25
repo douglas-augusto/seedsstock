@@ -24,34 +24,36 @@ import jframes.TesteTabela;
 
 /**
  *
- * @author Douglas
+ * @author Renan
  */
-public class TelaApagarSemente extends javax.swing.JInternalFrame {
-
-    Toolkit tk = Toolkit.getDefaultToolkit();
+public class TelaListarSemente extends javax.swing.JInternalFrame {
+    
+     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
 
     public void setPosition() {
-        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 6);
+        this.setLocation((d.width - this.getSize().width) /2, (d.height - this.getSize().height) / 6);
     }
 
     /**
-     * Creates new form TelaApagarSemente
+     * Creates new form TelaAlterarSemente
      */
+    
     DefaultTableModel dtmBusca;
-    ArrayList<Semente> arraySementes = new ArrayList();
-
-    public TelaApagarSemente() {
+    ArrayList<Semente> arraySementesAlterar = new ArrayList();
+   // PainelAlterar painelAlterar = new PainelAlterar();
+        
+    public TelaListarSemente() {
         initComponents();
-
+        
         try {
             carregaArray();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
         }
         carregaTabela();
-
-        setTitle("Apagar Sementes");
+        
+        setTitle("Listar Sementes");
         setBounds(100, 100, 800, 600);
     }
 
@@ -68,9 +70,10 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        botaoDeletarSemente = new javax.swing.JButton();
+        botaoFecharListar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -104,19 +107,19 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        jButton1.setText("Apagar");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Modify.png"))); // NOI18N
+        jButton1.setText("Alterar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        botaoDeletarSemente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        botaoDeletarSemente.setText("Fechar");
-        botaoDeletarSemente.addActionListener(new java.awt.event.ActionListener() {
+        botaoFecharListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        botaoFecharListar.setText("Fechar");
+        botaoFecharListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoDeletarSementeActionPerformed(evt);
+                botaoFecharListarActionPerformed(evt);
             }
         });
 
@@ -130,6 +133,14 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
+        jButton2.setText("Apagar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,9 +151,11 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoDeletarSemente))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+                        .addComponent(botaoFecharListar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,21 +164,18 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(botaoDeletarSemente))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoFecharListar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botaoDeletarSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeletarSementeActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-    }//GEN-LAST:event_botaoDeletarSementeActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
@@ -174,12 +184,17 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER " + arraySementes.get(jTable1.getSelectedRow()).getNome() + " do Sistema?", "Excluir", JOptionPane.OK_OPTION);
+      PainelAlterar alt = new PainelAlterar(arraySementesAlterar.get(jTable1.getSelectedRow()));
+      alt.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER " + arraySementesAlterar.get(jTable1.getSelectedRow()).getNome() + " do Sistema?", "Excluir", JOptionPane.OK_OPTION);
         if (i == 0) {
             
             SementeDAO sdao = new SementeDAO();
             try {
-                sdao.excluir(arraySementes.get(jTable1.getSelectedRow()).getIdsemente());
+                sdao.excluir(arraySementesAlterar.get(jTable1.getSelectedRow()).getIdsemente());
                 dtmBusca.removeRow(jTable1.getSelectedRow());
                 dtmBusca.fireTableDataChanged();
                 
@@ -188,14 +203,19 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(TelaApagarSemente.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
-    else {
-            System.out.println(i);
         }
-    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void botaoFecharListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharListarActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_botaoFecharListarActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoDeletarSemente;
+    private javax.swing.JButton botaoFecharListar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -203,20 +223,20 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    public void carregaArray() throws ClassNotFoundException {
+ public void carregaArray() throws ClassNotFoundException {
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
 
         int cont = 0;
-
-        // sementeDAO sDao = new sementeDAO();
+       
+       // sementeDAO sDao = new sementeDAO();
         try {
             stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
             rs = stmt.executeQuery();
 
-            arraySementes.clear();
+            arraySementesAlterar.clear();
             while (rs.next()) {
                 /////////////////////////////////
                 Semente semente = new Semente();
@@ -241,7 +261,7 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
                 semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
                 semente.setObservacoes(rs.getString("observacoes"));
 
-                arraySementes.add(semente);
+                arraySementesAlterar.add(semente);
 
                 //Preenchendo tabela
             }
@@ -252,9 +272,9 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
             MakeConnection.closeConnection(con, stmt, rs);
         }
     }
-
-    public void carregaTabela() {
-        
+ 
+ public void carregaTabela() {
+        DefaultTableModel dtmBusca;
 
         String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Venda", "Preço Compra"};
         String[] linha = new String[5];
@@ -293,8 +313,8 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
         }
 
     }
-
-    public void carregaArraySorter() throws ClassNotFoundException {
+ 
+ public void carregaArraySorter() throws ClassNotFoundException {
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
 
@@ -307,7 +327,7 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
             stmt = con.prepareStatement("SELECT * FROM sementes where nome LIKE '%" + jTextField1.getText() + "%' ORDER BY nome ASC");
             rs = stmt.executeQuery();
 
-            arraySementes.clear();
+            arraySementesAlterar.clear();
             while (rs.next()) {
                 /////////////////////////////////
                 Semente semente = new Semente();
@@ -332,7 +352,7 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
                 semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
                 semente.setObservacoes(rs.getString("observacoes"));
 
-                arraySementes.add(semente);
+                arraySementesAlterar.add(semente);
 
                 //Preenchendo tabela
             }
@@ -343,8 +363,8 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
             MakeConnection.closeConnection(con, stmt, rs);
         }
     }
-
-    public void sorterTabelaBusca() {
+ 
+ public void sorterTabelaBusca() {
 
         try {
             carregaArraySorter();
@@ -358,17 +378,20 @@ public class TelaApagarSemente extends javax.swing.JInternalFrame {
         String[] linha = new String[5];
 
         dtmBusca = new DefaultTableModel(null, colunas);
-        for (int i = 0; i < arraySementes.size(); i++) {
-            linha[0] = Integer.toString(arraySementes.get(i).getIdsemente());
-            linha[1] = arraySementes.get(i).getNome();
-            linha[2] = arraySementes.get(i).getEspecie();
-            linha[3] = Float.toString(arraySementes.get(i).getPreco_compra());
-            linha[4] = Float.toString(arraySementes.get(i).getPreco_venda());
+        for (int i = 0; i < arraySementesAlterar.size(); i++) {
+            linha[0] = Integer.toString(arraySementesAlterar.get(i).getIdsemente());
+            linha[1] = arraySementesAlterar.get(i).getNome();
+            linha[2] = arraySementesAlterar.get(i).getEspecie();
+            linha[3] = Float.toString(arraySementesAlterar.get(i).getPreco_compra());
+            linha[4] = Float.toString(arraySementesAlterar.get(i).getPreco_venda());
             dtmBusca.addRow(linha);
         }
         jTable1.setModel(dtmBusca);
         dtmBusca.fireTableDataChanged();
-
+        
     }
-
+ 
+ 
+ 
+    
 }

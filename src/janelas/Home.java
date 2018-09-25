@@ -34,6 +34,10 @@ public class Home extends javax.swing.JFrame {
    TelaGerirVendas telaGerVendas = new TelaGerirVendas();
     
    TelaGerirFornecedor telaGerFornecedor = new TelaGerirFornecedor();
+   TelaVenderSemente telaVenderSemente = new TelaVenderSemente();
+   TelaAddFornecedor telaAddFornecedor = new TelaAddFornecedor();
+   
+   TelaListarSemente telaListarSemente = new TelaListarSemente();
    
    
    private void fecharJanelas(){
@@ -46,6 +50,10 @@ public class Home extends javax.swing.JFrame {
        telaGerVendas.setVisible(false);
        
        telaGerFornecedor.setVisible(false);
+       telaVenderSemente.setVisible(false);
+       telaAddFornecedor.setVisible(false);
+       
+       telaListarSemente.setVisible(false);           
        
    }
   
@@ -433,7 +441,10 @@ public class Home extends javax.swing.JFrame {
     
     
     private void menuCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadFornecedorActionPerformed
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaAddFornecedor);
+        telaAddFornecedor.setVisible(true);
+        telaAddFornecedor.setPosition();
         
     }//GEN-LAST:event_menuCadFornecedorActionPerformed
 
@@ -452,8 +463,7 @@ public class Home extends javax.swing.JFrame {
 
     private void botaoCadSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadSementeMouseClicked
         fecharJanelas();
-        painelCentral.add(telaCadSemente);
-        
+        painelCentral.add(telaCadSemente); 
         telaCadSemente.setVisible(true);
         telaCadSemente.setPosition();
         
@@ -501,7 +511,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerirVendasMouseClicked
 
     private void botaoCadFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadFornecedorMouseClicked
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaAddFornecedor);
+        telaAddFornecedor.setVisible(true);
+        telaAddFornecedor.setPosition();
         
     }//GEN-LAST:event_botaoCadFornecedorMouseClicked
 
@@ -515,12 +528,18 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerirFornecedorMouseClicked
 
     private void botaoVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoVenderMouseClicked
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaVenderSemente);
+        telaVenderSemente.setVisible(true);
+        telaVenderSemente.setPosition();
        
     }//GEN-LAST:event_botaoVenderMouseClicked
 
     private void menuNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovaVendaActionPerformed
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaVenderSemente);
+        telaVenderSemente.setVisible(true);
+        telaVenderSemente.setPosition();
         
     }//GEN-LAST:event_menuNovaVendaActionPerformed
 
@@ -551,7 +570,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_menuDelSementeActionPerformed
 
     private void menuListSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListSementeActionPerformed
-        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaListarSemente);
+        telaListarSemente.setVisible(true);
+        telaListarSemente.setPosition();
         
     }//GEN-LAST:event_menuListSementeActionPerformed
 
