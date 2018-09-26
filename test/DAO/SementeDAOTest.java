@@ -98,6 +98,42 @@ public class SementeDAOTest {
         } 
     }
     @Test
+    public void testAlterarSementeNomeMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setNome("abd");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaNomeSemente());
+            System.out.println("Teste ALTERAR NOME NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR NOME passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeNomeMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setNome("abcdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaNomeSemente());
+            System.out.println("Teste ALTERAR NOME NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR NOME passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeNomeCaractere() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setNome("abcd@!#");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaNomeSemente());
+            System.out.println("Teste ALTERAR NOME NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR NOME passou!");
+        } 
+    }
+    @Test
     public void testAlterarSementeOrigem() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
@@ -109,19 +145,43 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR ORIGEM NAO passou!");
         } 
     }
-    /*
-    @Test
-    public void testAlterarSementeOrigemComCaractere() throws ClassNotFoundException, SQLException{
+    
+   @Test
+    public void testAlterarSementeOrigemMenor() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
-        s.setOrigem("@CIDADE");
+        s.setOrigem("abc");
         if(sd.Alterar(s)){
-            assertTrue("Deve retornar TRUE", s.validaOrigemSemente());
-            System.out.println("Teste ALTERAR ORIGEM passou!");
-        }else{
+            assertFalse("Deve retornar False", s.validaOrigemSemente());
             System.out.println("Teste ALTERAR ORIGEM NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ORIGEM passou!");
         } 
-    }*/
+    }
+     @Test
+    public void testAlterarSementeOrigemMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setOrigem("abcdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaOrigemSemente());
+            System.out.println("Teste ALTERAR ORIGEM NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ORIGEM passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeOrigemCaractere() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setOrigem("abcd@!#");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaOrigemSemente());
+            System.out.println("Teste ALTERAR ORIGEM NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ORIGEM passou!");
+        } 
+    }
     @Test
     public void testAlterarSementeEspecie() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
@@ -135,6 +195,42 @@ public class SementeDAOTest {
         } 
     }
     @Test
+    public void testAlterarSementeEspecieMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setEspecie("abc");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaEspecieSemente());
+            System.out.println("Teste ALTERAR ESPECIE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ESPECIE passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeEspecieMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setEspecie("abcdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaEspecieSemente());
+            System.out.println("Teste ALTERAR ESPECIE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ESPECIE passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeEspecieCaractere() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setEspecie("abcd@!#");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaEspecieSemente());
+            System.out.println("Teste ALTERAR ESPECIE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ESPECIE passou!");
+        } 
+    }
+    @Test
     public void testAlterarSementeQtd() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
@@ -144,6 +240,18 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR QTD passou!");
         }else{
             System.out.println("Teste ALTERAR QTD NAO passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeQtdMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setQuant(-1);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaQtdSemente());
+            System.out.println("Teste ALTERAR QTD NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR QTD passou!");
         } 
     }
      @Test

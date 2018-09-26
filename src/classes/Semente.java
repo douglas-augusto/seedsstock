@@ -141,30 +141,34 @@ public class Semente {
     
     public boolean validaNomeSemente(){
         if(nome.length()<4 || nome.length()>20){
-            JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
         if (Pattern.compile("[^a-zA-Z ]").matcher(nome).find()) {
-            JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
         return true;
     }
      public boolean validaOrigemSemente(){
-        if(origem.length()<2 || origem.length()>20){
+        if(origem.length()<4 || origem.length()>20){
             //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
-        }         
+        }       
+        if (Pattern.compile("[^a-zA-Z ]").matcher(origem).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
         return true;
     }
     
     public boolean validaEspecieSemente(){
         if(especie.length()<4 || especie.length()>20){
-            JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
         if (Pattern.compile("[^a-zA-Z ]").matcher(especie).find()) {
-            JOptionPane.showMessageDialog(null, "O nome da semente deve ter apenas letras");
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve ter apenas letras");
             return false;
         }
         return true;
@@ -229,7 +233,7 @@ public class Semente {
     
     public boolean validaQtdSemente(){
         if(quant < 0){
-            JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
