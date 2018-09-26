@@ -150,6 +150,13 @@ public class Semente {
         }
         return true;
     }
+     public boolean validaOrigemSemente(){
+        if(origem.length()<2 || origem.length()>20){
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }         
+        return true;
+    }
     
     public boolean validaEspecieSemente(){
         if(especie.length()<4 || especie.length()>20){

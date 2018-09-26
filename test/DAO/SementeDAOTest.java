@@ -98,6 +98,18 @@ public class SementeDAOTest {
         } 
     }
     @Test
+    public void testAlterarSementeOrigem() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setOrigem("CIDADE");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", s.validaOrigemSemente());
+            System.out.println("Teste ALTERAR ORIGEM passou!");
+        }else{
+            System.out.println("Teste ALTERAR ORIGEM NAO passou!");
+        } 
+    }
+    @Test
     public void testAlterarSementeEspecie() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
