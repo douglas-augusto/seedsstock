@@ -170,7 +170,7 @@ public class Semente {
         return true;
     }
     public boolean validaRaridade(){
-        if(raridade != "A"  || raridade != "B" || raridade != "C" || raridade != "D"){
+        if(raridade != "A"  && raridade != "B" && raridade != "C" && raridade != "D"){
             //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -184,7 +184,7 @@ public class Semente {
         }
         return true;
     }
-    
+        
     public boolean validaDiaColSemente(){
         if(dia_col < 1 || dia_col > 31){
             //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
@@ -214,7 +214,7 @@ public class Semente {
         return true;
     }
     public boolean validaMesValSemente(){
-        if(mes_col < 1 || mes_col > 12){
+        if(mes_val < 1 || mes_val > 12){
             //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }

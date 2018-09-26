@@ -6,6 +6,7 @@
 package janelas;
 
 //import DAO.SementeDAO;
+import DAO.SementeDAO;
 import classes.Semente;
 //import conection.MakeConnection;
 import java.awt.Dimension;
@@ -37,7 +38,7 @@ public class TelaBuscarImprimir extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaBuscarImprimir
      */
-    // ArrayList<Semente> arraySementes = new ArrayList();
+    ArrayList<Semente> arraySementes = new ArrayList();
     DefaultTableModel dtmSemente;
     ArrayList<Semente> arrayF_aux;
 
@@ -181,11 +182,11 @@ public class TelaBuscarImprimir extends javax.swing.JInternalFrame {
 
         dtmSemente = new DefaultTableModel(null, colunas);
         
-        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI
+        /*QUANDO O BANCO TIVER PRONTO, EDITAR AQUI*/
         
-        SementeDAO s = new SementeDAO();
+        SementeDAO sd = new SementeDAO();
 
-        ArrayList<Semente> array = (ArrayList<Semente>) s.read(sql);
+        ArrayList<Semente> array = (ArrayList<Semente>) sd.read(sql);
 
         arrayF_aux = array;
 
@@ -196,7 +197,7 @@ public class TelaBuscarImprimir extends javax.swing.JInternalFrame {
             linha[3] = Float.toString(array.get(i).getPreco_compra());
             linha[4] = Float.toString(array.get(i).getPreco_venda());
             dtmSemente.addRow(linha);
-        }*/
+        }/**/
         jTable1.setModel(dtmSemente);
         dtmSemente.fireTableDataChanged();
     }

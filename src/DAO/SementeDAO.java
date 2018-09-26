@@ -157,7 +157,8 @@ public class SementeDAO {
             
             stmt.executeUpdate();
             result = true;
-            JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
+            //DESCOMENTAR DEPOIS
+            //JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
@@ -186,8 +187,8 @@ public class SementeDAO {
             stmt.setInt(1, id);
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            //DESCOMENTAR DEPOIS
+            //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
             result = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir dao: " + ex);
