@@ -43,8 +43,20 @@ public class SementeTestes {
     }
     
     @Test
+    public void testNomeEspecieMenorQue4() {
+        s.setEspecie("cer");
+        assertFalse("Deveria retornar falso", s.validaEspecieSemente());
+    }
+    
+    @Test
+    public void testNomeEspecieMaiorQue20() {
+        s.setEspecie("eyrueirudyriduridosieudysueiduf ");
+        assertFalse("Deveria retornar falso", s.validaEspecieSemente());
+    }
+    
+    @Test
     public void testNomeSementeValidoLetrasNumerosCaracEspeciais() {
-        s.setNome("kaiser 300ml(#)");
+        s.setNome("kyrtyrtyrty(#)");
         assertTrue("Deveria retornar true", s.validaNomeSemente());
     }
     
@@ -90,6 +102,13 @@ public class SementeTestes {
     public void testQuantidadeMaiorIgual0(){
         s.setQuant(0);
         assertTrue("Deveria retornar false", s.validaQtdSemente());
-    }   
+    }
+    
+    @Test
+    public void testAnoColheita(){
+        s.setAno_val(2000);
+        s.setAno_col(1900);
+        assertTrue("Deveria retornar false", s.validaAnoValSemente());
+    }
     
 }
