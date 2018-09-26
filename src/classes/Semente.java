@@ -5,6 +5,7 @@
  */
 package classes;
 
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -140,9 +141,58 @@ public class Semente {
     
     public boolean validaNomeSemente(){
         if(nome.length()<4 || nome.length()>20){
-            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
-        }         
+        }       
+        if (Pattern.compile("[^a-zA-Z ]").matcher(nome).find()) {
+            JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaEspecieSemente(){
+        if(especie.length()<4 || especie.length()>20){
+            JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }       
+        if (Pattern.compile("[^a-zA-Z ]").matcher(especie).find()) {
+            JOptionPane.showMessageDialog(null, "O nome da semente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaData(){
+        if(dia_col < 1 || dia_col > 31){
+           // JOptionPane.showMessageDialog(null, "Dia inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(dia_val < 1 || dia_val > 31){
+          //  JOptionPane.showMessageDialog(null, "Dia inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(mes_col < 1 || mes_col > 12){
+          //  JOptionPane.showMessageDialog(null, "Mes inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if(mes_val < 1 || mes_val > 12){
+           // JOptionPane.showMessageDialog(null, "Mes inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(ano_col < 1 || ano_col > 2000){
+           // JOptionPane.showMessageDialog(null, "Ano inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(ano_val < 1 || ano_val > 2000){
+            //JOptionPane.showMessageDialog(null, "Ano inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return true;
     }
     
@@ -179,7 +229,7 @@ public class Semente {
     
     public boolean validaQtdSemente(){
         if(quant < 0){
-            //JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "A quantidade de produtos deve ser maior ou igual à 0", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
