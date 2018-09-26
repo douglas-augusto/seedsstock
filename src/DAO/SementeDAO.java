@@ -120,6 +120,35 @@ public class SementeDAO {
         //return pessoasSql;
         return arraySementes;
     }
+    public Semente readId(int id) throws ClassNotFoundException, SQLException {
+
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        Semente s = new Semente();
+        id = getLastId();
+        ResultSet rs = null;
+        String sql = Integer.toString(id);        
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                stmt = con.prepareStatement(
+                    "SELECT nome, especie, quant, raridade, dia_col, mes_col, ano_col, "
+                    + "dia_val, mes_val, ano_val, preco_compra, preco_venda, origem, fornecedor, "
+                    + "condicoes_plantil, observacoes"
+                    + "FROM sementes WHERE idsemente = id");
+            }
+            rs.getString(s.getNome());
+            JOptionPane.showInputDialog( rs.getString(s.getNome()));
+            ///COMPLETAR
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
+        return s;
+    }
 
     public boolean Alterar(Semente s) throws ClassNotFoundException, SQLException {
 

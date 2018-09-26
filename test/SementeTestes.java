@@ -57,7 +57,7 @@ public class SementeTestes {
     @Test
     public void testNomeSementeValidoLetrasNumerosCaracEspeciais() {
         s.setNome("kyrtyrtyrty(#)");
-        assertTrue("Deveria retornar true", s.validaNomeSemente());
+        assertFalse("Deveria retornar FALSE", s.validaNomeSemente());
     }
     
     @Test
