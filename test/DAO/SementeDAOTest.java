@@ -109,6 +109,19 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR ORIGEM NAO passou!");
         } 
     }
+    /*
+    @Test
+    public void testAlterarSementeOrigemComCaractere() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setOrigem("@CIDADE");
+        if(sd.Alterar(s)){
+            assertTrue("Deve retornar TRUE", s.validaOrigemSemente());
+            System.out.println("Teste ALTERAR ORIGEM passou!");
+        }else{
+            System.out.println("Teste ALTERAR ORIGEM NAO passou!");
+        } 
+    }*/
     @Test
     public void testAlterarSementeEspecie() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
@@ -145,6 +158,30 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR RARIDADE NAO passou!");
         } 
     }
+    @Test
+    public void testAlterarSementeRaridadeCaractere() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setRaridade("@");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaRaridade());
+            System.out.println("Teste ALTERAR RARIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR RARIDADE passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeRaridadeOutraLetra() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setRaridade("G");
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaRaridade());
+            System.out.println("Teste ALTERAR RARIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR RARIDADE passou!");
+        } 
+    }
      @Test
     public void testAlterarSementeDiaColheita() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
@@ -157,6 +194,30 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR DIA COLHEITA NAO passou!");
         } 
     }
+    @Test
+    public void testAlterarSementeDiaColheitaMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setDia_col(00);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaDiaColSemente());
+            System.out.println("Teste ALTERAR DIA COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR DIA COLHEITA passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeDiaColheitaMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setDia_col(100);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaDiaColSemente());
+            System.out.println("Teste ALTERAR DIA COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR DIA COLHEITA passou!");
+        } 
+    }
      @Test
     public void testAlterarSementeMesColheita() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
@@ -167,6 +228,30 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR MES COLHEITA passou!");
         }else{
             System.out.println("Teste ALTERAR MES COLHEITA NAO passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeMesColheitaMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setMes_col(0);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaMesColSemente());
+            System.out.println("Teste ALTERAR MES COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR MES COLHEITA passou!");
+        } 
+    }
+     @Test
+    public void testAlterarSementeMesColheitaMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setMes_col(20);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaMesColSemente());
+            System.out.println("Teste ALTERAR MES COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR MES COLHEITA passou!");
         } 
     }
     @Test
@@ -182,6 +267,30 @@ public class SementeDAOTest {
         } 
     }
     @Test
+    public void testAlterarSementeAnoColheitaMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setAno_col(000);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaAnoColSemente());
+            System.out.println("Teste ALTERAR ANO COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ANO COLHEITA passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeAnoColheitaMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setAno_col(3000);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaAnoColSemente());
+            System.out.println("Teste ALTERAR ANO COLHEITA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ANO COLHEITA passou!");
+        } 
+    }
+    @Test
     public void testAlterarSementeDiaValidade() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
@@ -191,6 +300,30 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR DIA VALIDADE passou!");
         }else{
             System.out.println("Teste ALTERAR DIA VALIDADE NAO passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeDiaValidadeMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setDia_val(0);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaDiaValSemente());
+            System.out.println("Teste ALTERAR DIA VALIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR DIA VALIDADE passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeDiaValidadeMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setDia_val(40);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaDiaValSemente());
+            System.out.println("Teste ALTERAR DIA VALIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR DIA VALIDADE passou!");
         } 
     }
      @Test
@@ -203,6 +336,30 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR MES VALIDADE passou!");
         }else{
             System.out.println("Teste ALTERAR MES VALIDADE NAO passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeMesValidadeMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setMes_val(0);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaMesValSemente());
+            System.out.println("Teste ALTERAR MES VALIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR MES VALIDADE passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementeMesValidadeMaior() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setMes_val(15);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaMesValSemente());
+            System.out.println("Teste ALTERAR MES VALIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR MES VALIDADE passou!");
         } 
     }
     @Test
@@ -220,6 +377,20 @@ public class SementeDAOTest {
         } 
     }
     @Test
+    public void testAlterarSementeAnoValidadeMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        //////atencao aqui
+        s.setAno_col(1999);
+        s.setAno_val(1998);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaAnoValSemente());
+            System.out.println("Teste ALTERAR ANO VALIDADE NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR ANO VALIDADE passou!");
+        } 
+    }
+    @Test
     public void testAlterarSementePrecoCompra() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
         SementeDAO sd = new SementeDAO();
@@ -229,6 +400,18 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR PRECO COMPRA passou!");
         }else{
             System.out.println("Teste ALTERAR PRECO COMPRA NAO passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementePrecoCompraZero() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setPreco_compra(000);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar False", s.validaPrecoCompra());
+            System.out.println("Teste ALTERAR PRECO COMPRA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR PRECO COMPRA passou!");
         } 
     }
     @Test
@@ -242,6 +425,19 @@ public class SementeDAOTest {
             System.out.println("Teste ALTERAR PRECO COMPRA passou!");
         }else{
             System.out.println("Teste ALTERAR PRECO COMPRA NAO passou!");
+        } 
+    }
+    @Test
+    public void testAlterarSementePrecoVendaMenor() throws ClassNotFoundException, SQLException{
+       Semente s = new Semente();
+        SementeDAO sd = new SementeDAO();
+        s.setPreco_compra(2000);
+        s.setPreco_venda(1999);
+        if(sd.Alterar(s)){
+            assertFalse("Deve retornar FALSE", s.validaPrecoVenda());
+            System.out.println("Teste ALTERAR PRECO COMPRA NAO passou!");
+        }else{
+            System.out.println("Teste ALTERAR PRECO COMPRA passou!");
         } 
     }
     
