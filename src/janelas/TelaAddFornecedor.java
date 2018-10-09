@@ -5,7 +5,7 @@
  */
 package janelas;
 
-//import DAO.FornecedorDAO;
+import DAO.FornecedorDAO;
 
 import classes.Fornecedor;
 import classes.Semente;
@@ -410,7 +410,7 @@ public class TelaAddFornecedor extends javax.swing.JInternalFrame {
         f.setEmail(jTextField10.getText());
         f.setObs(jTextArea2.getText());
         
-        /* QUANDO O BANCO FOR CRIADO, EDITAR AQUI
+     
         FornecedorDAO fdao = new FornecedorDAO();
 
         try {
@@ -419,7 +419,7 @@ public class TelaAddFornecedor extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaAddFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TelaAddFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     public void limparTextFields() {

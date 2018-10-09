@@ -5,11 +5,11 @@
  */
 package janelas;
 
-//import DAO.FornecedorDAO;
-//import DAO.SementeDAO;
+import DAO.FornecedorDAO;
+import DAO.SementeDAO;
 import classes.Fornecedor;
 import classes.Semente;
-//import conection.MakeConnection;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -223,14 +223,14 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arrayF_aux.get(jTable1.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
         if (i == 0) {
             
-            /*APÓS CRIAR O BANCO, EDITAR AQUI
+          
             FornecedorDAO fdao = new FornecedorDAO();
 
             try {
                 boolean excluir = fdao.excluir(arrayF_aux.get(jTable1.getSelectedRow()).getIdfornecedor());
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
             
             dtmFornecedor.removeRow(jTable1.getSelectedRow());
             dtmFornecedor.fireTableDataChanged();
@@ -269,7 +269,6 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
 
         dtmFornecedor = new DefaultTableModel(null, colunas);
         
-        /*APÓS CRIAR O BANCO, EDITAR AQUI
         FornecedorDAO f = new FornecedorDAO();
 
         ArrayList<Fornecedor> array = (ArrayList<Fornecedor>) f.read(sql);
@@ -283,7 +282,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
             linha[3] = array.get(i).getEmail();
             dtmFornecedor.addRow(linha);
         }
-        */
+      
         jTable1.setModel(dtmFornecedor);
         dtmFornecedor.fireTableDataChanged();
     }

@@ -5,11 +5,10 @@
  */
 package janelas;
 
-//import DAO.SementeDAO;
 import DAO.SementeDAO;
 import classes.Semente;
 import classes.teclasPermitidas;
-//import conection.MakeConnection;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -610,7 +609,38 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         jTextArea1.setText("");
         jTextArea2.setText("");
         
-    }  
+    }
+    
+    public void carregaChoiceFornecedor() throws ClassNotFoundException{
+        
+      
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        
+        ResultSet rs = null;
+        
+        
+        //List<Pessoa> pessoasSql = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM fornecedores");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+               /////////////////////////////////
+               choice1.add(rs.getString("nome"));
+                   
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
+    
+    }
     
     
     
