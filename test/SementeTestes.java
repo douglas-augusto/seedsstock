@@ -57,7 +57,7 @@ public class SementeTestes {
     @Test
     public void testNomeSementeValidoLetrasNumerosCaracEspeciais() {
         s.setNome("kyrtyrtyrty(#)");
-        assertTrue("Deveria retornar true", s.validaNomeSemente());
+        assertFalse("Deveria retornar FALSE", s.validaNomeSemente());
     }
     
     @Test
@@ -111,4 +111,39 @@ public class SementeTestes {
         assertTrue("Deveria retornar false", s.validaAnoValSemente());
     }
     
+    @Test
+    public void testDiaColValido(){
+        s.setDia_col(32);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
+    
+    @Test
+    public void testDiaValValido(){
+        s.setDia_val(32);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
+    
+    @Test
+    public void testMesColValido(){
+        s.setMes_col(13);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
+    
+    @Test
+    public void testMesValValido(){
+        s.setMes_col(13);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
+    
+    @Test
+    public void testAnoColValido(){
+        s.setAno_col(0);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
+    
+    @Test
+    public void testAnoValValido(){
+        s.setAno_val(0);
+        assertFalse("Deveria retornar false", s.validaData());
+    }
 }
