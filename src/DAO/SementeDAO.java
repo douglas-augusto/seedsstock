@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ramyllo
+ * @author douglas
  */
 public class SementeDAO {
 
