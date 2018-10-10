@@ -235,11 +235,11 @@ public class Fornecedor {
     }
     
     public boolean validaObsFornecedor(){
-        if(email.length()<4 || email.length()>45){
+        if(obs.length()<4 || obs.length()>45){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(email).find()) {
+        if (Pattern.compile("[^a-zA-Z ]").matcher(obs).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }

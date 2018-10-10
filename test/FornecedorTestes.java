@@ -86,7 +86,7 @@ public class FornecedorTestes {
     }
     @Test
     public void testBairroFornecedorMenorQue4() {
-        s.setRua("cer");
+        s.setBairro("cer");
         assertFalse("Deveria retornar falso", s.validaBairroFornecedor());
     }
     
@@ -117,14 +117,14 @@ public class FornecedorTestes {
         assertFalse("Deveria retornar falso", s.validaEstadoFornecedor());
     }
     @Test
-    public void testEstadoFornecedorMenorQue4() {
-        s.setEstado("cer");
+    public void testEstadoFornecedorMenorQue2() {
+        s.setEstado("c");
         assertFalse("Deveria retornar falso", s.validaEstadoFornecedor());
     }
     
     @Test
     public void testEstadoFornecedorMaiorQue20() {
-        s.setCidade("eyrueirudyriduridosieudysueiduf ");
+        s.setEstado("eyrueirudyriduridosieudysueiduf ");
         assertFalse("Deveria retornar falso", s.validaEstadoFornecedor());
     }
     @Test
@@ -160,8 +160,8 @@ public class FornecedorTestes {
     }
     
     @Test
-    public void testObsFornecedorMaiorQue20() {
-        s.setObs("eyrueirudyriduridosieudysueiduf ");
+    public void testObsFornecedorMaiorQue45() {
+        s.setObs("eyrueirudyriduridosieudysueidufadssskasdmasdkmassdmkadkmsklmdffdgnjfsdfnasdnfasjfsdjjkasfksdfjasfjaksfdjkasjfasdfsaddfjasfsdafjlasd");
         assertFalse("Deveria retornar falso", s.validaObsFornecedor());
     }
     
