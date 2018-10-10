@@ -73,7 +73,7 @@ public class SementeDAOTest {
         }else{
             System.out.println("Teste EXCLUIR NAO passou!");
         }
-    }
+    }/*
     @Test
     public void testAlterarSemente() throws ClassNotFoundException, SQLException{
        Semente s = new Semente();
@@ -549,5 +549,5 @@ public class SementeDAOTest {
         } 
     }
     
-    
+    */
 }

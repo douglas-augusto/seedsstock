@@ -60,6 +60,7 @@ public class SementeDAO {
             stmt.setString(16, s.getObservacoes());
 
             stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Semente cadastrada com sucesso!");
             result = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar: " + ex);
@@ -185,12 +186,14 @@ public class SementeDAO {
             stmt.setInt(17, s.getIdsemente());
             
             stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Dados alterados com sucesso com sucesso!");
             result = true;
             //DESCOMENTAR DEPOIS
             //JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
+            JOptionPane.showMessageDialog(null,"Dados não alterados, campos vazios ou valores inválidos!");
+            //JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
             result = false;
             System.out.println(ex);
         } finally {
