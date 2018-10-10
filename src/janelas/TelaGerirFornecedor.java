@@ -30,8 +30,6 @@ import jframes.TesteTabela;
  */
 public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
     
-    Fornecedor fornecedor = new Fornecedor();
-    PainelAlterarFornecedor telaAltFornecedor = new PainelAlterarFornecedor(fornecedor);
 
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();

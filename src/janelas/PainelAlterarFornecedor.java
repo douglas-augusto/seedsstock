@@ -5,7 +5,7 @@
  */
 package janelas;
 
-//import DAO.FornecedorDAO;
+import DAO.FornecedorDAO;
 import classes.Fornecedor;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ramyllo
+ * @author douglas
  */
 public final class PainelAlterarFornecedor extends javax.swing.JFrame {
 
@@ -331,12 +331,11 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
 
         TelaGerirFornecedor gerir = new TelaGerirFornecedor();
         
-        /*APÓS CRIAR O BANCO, EDITAR AQUI
         try {
             gerir.CarregaTabela("SELECT * FROM fornecedores ORDER by nome ASC");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
 
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -461,14 +460,14 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
         f.setEmail(jTextField10f.getText());
         f.setObs(jTextArea2f.getText());
         
-         /*APÓS CRIAR O BANCO, EDITAR AQUI
+       
         FornecedorDAO fdao = new FornecedorDAO();
 
         try {
             fdao.alterar(f);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
 }
