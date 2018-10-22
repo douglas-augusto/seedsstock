@@ -136,22 +136,22 @@ public class Fornecedor {
     }
     
     public boolean validaNomeFornecedor(){
-        if(nome.length()<4 || nome.length()>20){
+        if(nome.length()<4 || nome.length()>40){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(nome).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(nome).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
         return true;
     }
      public boolean validaCnpjFornecedor(){
-        if(cnpj.length()<4 || cnpj.length()>20){
+        if(cnpj.length()<18 || cnpj.length()>18){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(cnpj).find()) {
+        if (Pattern.compile("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})").matcher(cnpj).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
@@ -159,11 +159,11 @@ public class Fornecedor {
     }
     
     public boolean validaRuaFornecedor(){
-        if(rua.length()<4 || rua.length()>20){
+        if(rua.length()<4 || rua.length()>30){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(rua).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(rua).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
@@ -171,22 +171,22 @@ public class Fornecedor {
     }
         
     public boolean validaCidadeFornecedor(){
-        if(cidade.length()<4 || cidade.length()>20){
+        if(cidade.length()<4 || cidade.length()>30){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(cidade).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(cidade).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
         return true;
     }
     public boolean validaBairroFornecedor(){
-        if(bairro.length()<4 || bairro.length()>20){
+        if(bairro.length()<4 || bairro.length()>30){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(bairro).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(bairro).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
@@ -197,39 +197,57 @@ public class Fornecedor {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(estado).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(estado).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
         return true;
     }
     
-    /*
-    TELEFONE
-    
-    CELULAR
-    */
-    /*
-    public boolean validaCepFornecedor(){
-        if(cep.length()!=9){
-            //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+    public boolean validaTelefoneFornecedor(){
+        if(telefone.length()!=10){
+            //JOptionPane.showMessageDialog(null, "O cep do Fornecedor deve conter 8 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(rua).find()) {
+        if (Pattern.compile("^\\d{2}-\\d{4}-\\d{4}$").matcher(telefone).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
         return true;
-    }*/
+    }
+    public boolean validaCelularFornecedor(){
+        if(celular.length()!=11){
+            //JOptionPane.showMessageDialog(null, "O cep do Fornecedor deve conter 8 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }       
+        if (Pattern.compile("^\\d{2}-\\d{5}-\\d{4}$").matcher(celular).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    public boolean validaCepFornecedor(){
+        if(cep.length()!=8){
+            //JOptionPane.showMessageDialog(null, "O cep do Fornecedor deve conter 8 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }       
+        if (Pattern.compile("[^0-9]").matcher(cep).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras"); "^\\d{5}\\-?\\d{3}$" ^[0-9]{5}-[0-9]{3}
+            return false;
+        }
+        return true;
+    }
     
     public boolean validaEmailFornecedor(){
-        if(email.length()<4 || email.length()>20){
+        if(email.length()<10 || email.length()>45){
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$").matcher(email).find()) {
+        if (Pattern.compile("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/").matcher(email).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
+            //^[\\p{L}\\p{N}\\._%+-]+@[\\p{L}\\p{N}\\.\\-]+\\.[\\p{L}]{2,}$
+            
         }
         return true;
     }
@@ -239,7 +257,7 @@ public class Fornecedor {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(obs).find()) {
+        if (Pattern.compile("[^a-zA-Z0-9 !.;,:´`~^Çç?]").matcher(obs).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
