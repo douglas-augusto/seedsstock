@@ -5,8 +5,21 @@
  */
 package janelas;
 
+import DAO.SementeDAO;
+import classes.Semente;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import jframes.TesteTabela;
 
 /**
  *
@@ -23,9 +36,23 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaVenderSemente
+     * 
+     
      */
+    
+    DefaultTableModel dtmBusca;
+    ArrayList<Semente> arraySementesVenda = new ArrayList();
+    
     public TelaVenderSemente() {
         initComponents();
+        
+          try {
+            carregaArray();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        carregaTabela();
+        
         setTitle("Vender Sementes");
         setBounds(100, 100, 800, 600);
     }
@@ -44,17 +71,17 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        campoPesquisaVendas = new javax.swing.JTextField();
+        botaoAddAoCarrinho = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        campoQuantidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        campoTotalVenda = new javax.swing.JTextField();
+        botaoFinalizarCompra = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaVendas = new javax.swing.JTable();
 
         jLabel2.setText("jLabel2");
 
@@ -65,7 +92,12 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jLabel1.setText("Pesquisar:");
 
-        jTextField1.setText("jTextField1");
+        campoPesquisaVendas.setText("jTextField1");
+        campoPesquisaVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPesquisaVendasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -75,7 +107,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
+                .addComponent(campoPesquisaVendas)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -84,21 +116,21 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPesquisaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Adicionar ao carrinho");
+        botaoAddAoCarrinho.setText("Adicionar ao carrinho");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setText("Quantidade:");
 
-        jTextField2.setText("jTextField2");
+        campoQuantidade.setText("jTextField2");
 
         jLabel4.setText("Total da compra:");
 
-        jTextField3.setText("jTextField3");
+        campoTotalVenda.setText("jTextField3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -108,11 +140,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -121,16 +153,16 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jButton2.setText("Finalizar compra");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoFinalizarCompra.setText("Finalizar venda");
+        botaoFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoFinalizarCompraActionPerformed(evt);
             }
         });
 
@@ -142,18 +174,15 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Título 1", "Título 2", "Título 3", "Título 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaVendas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,12 +193,12 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botaoAddAoCarrinho)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addComponent(botaoFinalizarCompra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                         .addComponent(jButton3))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -184,11 +213,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(botaoFinalizarCompra)
                         .addComponent(jButton3))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botaoAddAoCarrinho)
                         .addGap(8, 8, 8)))
                 .addContainerGap())
         );
@@ -207,19 +236,130 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botaoFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoFinalizarCompraActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void campoPesquisaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaVendasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoPesquisaVendasActionPerformed
+
+    
+    public void carregaArray() throws ClassNotFoundException {
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        int cont = 0;
+       
+       // sementeDAO sDao = new sementeDAO();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
+            rs = stmt.executeQuery();
+
+            arraySementesVenda.clear();
+            while (rs.next()) {
+                /////////////////////////////////
+                Semente semente = new Semente();
+                ///////////////////////////////////
+                semente.setIdsemente(rs.getInt("idsemente"));
+                semente.setNome(rs.getString("nome"));
+                semente.setEspecie(rs.getString("especie"));
+                semente.setQuant(rs.getInt("quant"));
+                semente.setRaridade(rs.getString("raridade"));
+                semente.setDia_col(rs.getInt("dia_col"));
+                semente.setMes_col(rs.getInt("mes_col"));
+                semente.setAno_col(rs.getInt("ano_col"));
+                semente.setDia_val(rs.getInt("dia_val"));
+                semente.setMes_val(rs.getInt("mes_val"));
+                semente.setAno_val(rs.getInt("ano_val"));
+
+                semente.setPreco_compra(rs.getFloat("preco_compra"));
+                semente.setPreco_venda(rs.getFloat("preco_venda"));
+
+                semente.setOrigem(rs.getString("origem"));
+                semente.setFornecedor(rs.getString("fornecedor"));
+                semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
+                semente.setObservacoes(rs.getString("observacoes"));
+
+                arraySementesVenda.add(semente);
+
+                //Preenchendo tabela
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
+    }
+    
+    public void carregaTabela() {
+        DefaultTableModel dtmBusca;
+
+        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Venda", "Preço Compra"};
+        String[] linha = new String[5];
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        //String sql = "SELECT * FROM sementes";
+        String sql = "SELECT * FROM sementes ORDER BY nome ASC";
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        Connection con = null;
+        try {
+            con = MakeConnection.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Statement stmt;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                linha[0] = rs.getString("idsemente");
+                linha[1] = rs.getString("nome");
+                linha[2] = rs.getString("especie");
+                linha[3] = rs.getString("preco_compra");
+                linha[4] = rs.getString("preco_venda");
+                dtmBusca.addRow(linha);
+            }
+            tabelaVendas.setModel(dtmBusca);
+            dtmBusca.fireTableDataChanged();
+        } catch (SQLException ex) {
+            //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
+    
+    public void adicionarAoCarrinho(){
+        
+        
+    }
+    
+    public void finalizarVenda(){
+        
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botaoAddAoCarrinho;
+    private javax.swing.JButton botaoFinalizarCompra;
+    private javax.swing.JTextField campoPesquisaVendas;
+    private javax.swing.JTextField campoQuantidade;
+    private javax.swing.JTextField campoTotalVenda;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -230,9 +370,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tabelaVendas;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+
+
