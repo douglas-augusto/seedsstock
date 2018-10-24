@@ -54,7 +54,7 @@ public class FornecedorDAO {
             stmt.setString(12, f.getObs());
 
             stmt.executeUpdate();
-
+            JOptionPane.showMessageDialog(null,"Fornecedor cadastrado com sucesso!");
             return true;
 
         } catch (SQLException ex) {
@@ -149,11 +149,12 @@ public class FornecedorDAO {
             stmt.setInt(13, f.getIdfornecedor());
 
             stmt.executeUpdate();
-
+            JOptionPane.showMessageDialog(null,"Dados alterados com sucesso com sucesso!");
             return true;
 
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Fornecedor: " + ex);      com.mysql.jdbc.MysqlDataTruncation
+            JOptionPane.showMessageDialog(null,"Dados não alterados, campos vazios ou valores inválidos!");
             System.out.println(ex);
 
             return false;
