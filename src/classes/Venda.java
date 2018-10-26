@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Douglas
@@ -60,6 +62,45 @@ public class Venda {
         this.sementes = sementes;
     }
     
+    public boolean validaVenda(){
+    return ValidaDataVenda() && ValidaValorTotal() && ValidaQtd();
+    }
     
+
+    public boolean ValidaDataVenda(){
+        if(dataVenda.length()<8 || dataVenda.length()>8){
+            //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }       
+        if (Pattern.compile("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|20)\\d{2,2}").matcher(dataVenda).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras0 "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$"
+            return false;
+        }
+        return true;    
+    }
+    public boolean ValidaValorTotal(){
+        if(valorTotal <= 0){
+            //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }    
+  
+    public boolean ValidaQtd(){
+         if(quantidade <= 0){
+            //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;    
+    }
+    /*
+    public boolean ValidaSementesVenda(){
+     if(sementes ){
+            //JOptionPane.showMessageDialog(null, "O preço de venda deve ser maior que o preço de compra!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }*/
+
     
 }

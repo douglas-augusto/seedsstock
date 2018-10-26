@@ -136,7 +136,7 @@ public class Semente {
 	}
         
         public boolean validarSemente(){
-        return validaNomeSemente() && validaPrecoCompra() && validaPrecoVenda() && validaQtdSemente();
+        return validaNomeSemente() && validaPrecoCompra() && validaPrecoVenda() && validaQtdSemente() && validaOrigemSemente() && validaEspecieSemente() && validaData() && validaRaridade() && validaDiaColSemente() && validaDiaValSemente() && validaMesColSemente() && validaMesValSemente() && validaAnoColSemente() && validaAnoValSemente();
     }
     
     public boolean validaNomeSemente(){

@@ -132,7 +132,7 @@ public class Fornecedor {
     ///////////////////////////////////////
     
     public boolean validarFornecedor(){
-        return validaNomeFornecedor() && validaCnpjFornecedor()&& validaRuaFornecedor()&& validaCidadeFornecedor() && validaEstadoFornecedor() && validaEmailFornecedor() && validaObsFornecedor();
+        return validaNomeFornecedor() && validaCnpjFornecedor()&& validaRuaFornecedor()&& validaCelularFornecedor() && validaTelefoneFornecedor() && validaCidadeFornecedor() && validaBairroFornecedor() && validaEstadoFornecedor() && validaCepFornecedor() && validaEmailFornecedor() && validaObsFornecedor();
     }
     
     public boolean validaNomeFornecedor(){
