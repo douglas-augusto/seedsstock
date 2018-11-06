@@ -6,8 +6,21 @@
 
 package janelas;
 
+import DAO.VendaDAO;
+import classes.Venda;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import jframes.TesteTabela;
 
 /**
  *
@@ -17,6 +30,8 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
+    DefaultTableModel dtmBusca;
+    ArrayList<Venda> arrayVendas = new ArrayList();
 
     public void setPosition() {
         this.setLocation((d.width - this.getSize().width) /2, (d.height - this.getSize().height) / 6);
@@ -25,6 +40,15 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     /** Creates new form TelaGerirVendas */
     public TelaGerirVendas() {
         initComponents();
+        
+        try {
+            carregaArray();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        carregaTabela();
+        
         setTitle("Minhas Vendas");
         setBounds(100, 100, 800, 600);
     }
@@ -41,18 +65,22 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        campoBuscarVenda = new javax.swing.JTextField();
+        botaoCancelarVenda = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaGerirVendas = new javax.swing.JTable();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
         jLabel1.setText("Pesquisar:");
 
-        jTextField1.setText("jTextField1");
+        campoBuscarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBuscarVendaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -62,7 +90,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
+                .addComponent(campoBuscarVenda)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -71,12 +99,12 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoBuscarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        jButton1.setText("Cancelar venda");
+        botaoCancelarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
+        botaoCancelarVenda.setText("Cancelar venda");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
         jButton2.setText("Fechar");
@@ -86,7 +114,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaGerirVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -97,7 +125,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaGerirVendas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,7 +137,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botaoCancelarVenda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -123,7 +151,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botaoCancelarVenda)
                     .addComponent(jButton2))
                 .addContainerGap())
         );
@@ -147,16 +175,95 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void campoBuscarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoBuscarVendaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botaoCancelarVenda;
+    private javax.swing.JTextField campoBuscarVenda;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaGerirVendas;
     // End of variables declaration//GEN-END:variables
 
+    public void carregaArray() throws ClassNotFoundException {
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        int cont = 0;
+      
+        try {
+            stmt = con.prepareStatement("SELECT * FROM vendas ORDER BY data ASC");
+            rs = stmt.executeQuery();
+
+            arrayVendas.clear();
+            while (rs.next()) {
+                /////////////////////////////////
+                Venda v = new Venda();
+                ///////////////////////////////////
+                v.setIdVenda(rs.getInt("idvenda"));
+                v.setDataVenda(rs.getDate("data"));
+                v.setValorTotal(rs.getFloat("valor_total"));
+                v.setQuantidade(rs.getInt("quantidade"));
+                
+                
+                arrayVendas.add(v);
+
+                //Preenchendo tabela
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
+    }
+    
+    public void carregaTabela() {
+        DefaultTableModel dtmBusca;
+
+        String[] colunas = {"Id Venda", "Data", "Valor Total", "Quantidade"};
+        String[] linha = new String[4];
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        //String sql = "SELECT * FROM sementes";
+        String sql = "SELECT * FROM vendas ORDER BY data ASC";
+
+        dtmBusca = new DefaultTableModel(null, colunas);
+
+        Connection con = null;
+        try {
+            con = MakeConnection.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Statement stmt;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                linha[0] = rs.getString("idvenda");
+                linha[1] = rs.getString("data");
+                linha[2] = rs.getString("valor_total");
+                linha[3] = rs.getString("quantidade");
+                dtmBusca.addRow(linha);
+            }
+            tabelaGerirVendas.setModel(dtmBusca);
+            dtmBusca.fireTableDataChanged();
+        } catch (SQLException ex) {
+            //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
 }
