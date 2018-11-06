@@ -405,6 +405,9 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     
     public void finalizarVenda(){
         
+        String sementes = String.join(" ", listaVenda);
+        String lista = String.join(" \n", listaVenda);
+        
         Date data = new Date(System.currentTimeMillis());
         //SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date dataSql = new java.sql.Date(data.getTime());
@@ -413,12 +416,21 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         v.setQuantidade(Integer.parseInt(campoQuantidade.getText()));
         v.setValorTotal(Float.parseFloat(campoTotalVenda.getText()));
         v.setDataVenda(dataSql);
+        v.setSementes(sementes);
         
         VendaDAO dao = new VendaDAO();
         
         try {
-            dao.salvar(v);
-            JOptionPane.showMessageDialog(rootPane, "Venda realizada com Sucesso!");
+            int dialogButton = JOptionPane.YES_NO_OPTION;   
+            int dialogResult = JOptionPane.showConfirmDialog(this,"Lista de compras:\n\n"+ lista, "Deseja confirma sua compra?", dialogButton);
+            if(dialogResult == 0) {
+                dao.salvar(v);
+                JOptionPane.showMessageDialog(rootPane, "Venda realizada com Sucesso!");
+   
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Venda cancelada!");
+           } 
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
