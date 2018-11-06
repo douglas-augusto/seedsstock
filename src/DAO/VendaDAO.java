@@ -120,34 +120,32 @@ public class VendaDAO {
     }
 
 
-    public boolean excluir(int id) throws ClassNotFoundException, SQLException {
+    public boolean excluir(int id) throws ClassNotFoundException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        PreparedStatement stmts = null;
-        boolean result = false;
-        //stmt.executeUpdate();
-
-
+        
         try {
             
             stmt = con.prepareStatement("DELETE FROM vendas WHERE idvenda = ?");
 
-            /////////////////////////////////
             stmt.setInt(1, id);
 
             stmt.executeUpdate();
-            //DESCOMENTAR DEPOIS
-            //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-            result = true;
+          
+            JOptionPane.showMessageDialog(null, "Venda concelada com sucesso!");
+            
+            return true;
+      
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir dao: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao cancelar: " + ex);
             System.out.println(ex);
-            result = false;
+            return false;
+        
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-        return result;
+    
     }
 
     public void read() throws ClassNotFoundException {

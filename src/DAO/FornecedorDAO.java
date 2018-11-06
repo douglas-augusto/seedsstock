@@ -185,7 +185,6 @@ public class FornecedorDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir dao: " + ex);
             System.out.println(ex);
-
             return false;
         } finally {
             MakeConnection.closeConnection(con, stmt);

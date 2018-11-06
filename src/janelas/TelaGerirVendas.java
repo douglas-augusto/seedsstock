@@ -6,6 +6,7 @@
 
 package janelas;
 
+import DAO.FornecedorDAO;
 import DAO.VendaDAO;
 import classes.Venda;
 import conection.MakeConnection;
@@ -19,6 +20,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jframes.TesteTabela;
 
@@ -105,6 +107,11 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
 
         botaoCancelarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
         botaoCancelarVenda.setText("Cancelar venda");
+        botaoCancelarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCancelarVendaActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
         jButton2.setText("Fechar");
@@ -178,6 +185,26 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     private void campoBuscarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoBuscarVendaActionPerformed
+
+    private void botaoCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarVendaActionPerformed
+        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar a compra?", "Cancelar compra", JOptionPane.OK_OPTION);
+        if (i == 0) {
+            
+          
+            VendaDAO vdao = new VendaDAO();
+
+            try {
+                boolean excluir = vdao.excluir(arrayVendas.get(tabelaGerirVendas.getSelectedRow()).getIdVenda());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            dtmBusca.removeRow(tabelaGerirVendas.getSelectedRow());
+            dtmBusca.fireTableDataChanged();
+
+        }
+    }//GEN-LAST:event_botaoCancelarVendaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
