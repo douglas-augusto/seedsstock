@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jframes.TesteTabela;
 
@@ -26,6 +27,10 @@ import jframes.TesteTabela;
  * @author Douglas
  */
 public class TelaVenderSemente extends javax.swing.JInternalFrame {
+    
+    float totalVendas = 0;
+    int quantidade = 0;
+    ArrayList<String> listaVenda = new ArrayList();
     
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
@@ -82,6 +87,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
+        botaoZerarCarrinho = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -120,6 +126,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         );
 
         botaoAddAoCarrinho.setText("Adicionar ao carrinho");
+        botaoAddAoCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAddAoCarrinhoActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -161,8 +172,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
-        jButton3.setText("Fechar");
+        jButton3.setText("Sair");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -179,6 +189,13 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabelaVendas);
 
+        botaoZerarCarrinho.setText("Limpar carrinho ");
+        botaoZerarCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoZerarCarrinhoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,17 +203,20 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(botaoAddAoCarrinho)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoFinalizarCompra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoFinalizarCompra)
+                            .addComponent(jButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoZerarCarrinho))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,24 +224,29 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botaoFinalizarCompra)
-                        .addComponent(jButton3))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoAddAoCarrinho)
-                        .addGap(8, 8, 8)))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(botaoAddAoCarrinho)
+                                .addGap(8, 8, 8)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botaoFinalizarCompra)
+                            .addComponent(botaoZerarCarrinho))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +268,20 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     private void campoPesquisaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaVendasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoPesquisaVendasActionPerformed
+
+    private void botaoAddAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddAoCarrinhoActionPerformed
+        // TODO add your handling code here:
+        try{
+        adicionarAoCarrinho();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Selecione um ítem para o carrinho", "Ação inválida", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_botaoAddAoCarrinhoActionPerformed
+
+    private void botaoZerarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoZerarCarrinhoActionPerformed
+        // TODO add your handling code here:
+        zerarCarrinho();
+    }//GEN-LAST:event_botaoZerarCarrinhoActionPerformed
 
     
     public void carregaArray() throws ClassNotFoundException {
@@ -298,7 +337,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     public void carregaTabela() {
         DefaultTableModel dtmBusca;
 
-        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Venda", "Preço Compra"};
+        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Compra", "Preço Venda"};
         String[] linha = new String[5];
 
         dtmBusca = new DefaultTableModel(null, colunas);
@@ -340,6 +379,22 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     
     public void adicionarAoCarrinho(){
         
+        totalVendas = totalVendas + Float.parseFloat((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 4));
+        quantidade++;
+        listaVenda.add((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 1));
+        
+        campoTotalVenda.setText(String.valueOf(totalVendas));
+        campoQuantidade.setText(String.valueOf(quantidade));
+           
+    }
+    
+    public void zerarCarrinho(){
+        
+        totalVendas = 0;
+        quantidade = 0;
+        
+        campoTotalVenda.setText("0");
+        campoQuantidade.setText("0");
         
     }
     
@@ -352,6 +407,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAddAoCarrinho;
     private javax.swing.JButton botaoFinalizarCompra;
+    private javax.swing.JButton botaoZerarCarrinho;
     private javax.swing.JTextField campoPesquisaVendas;
     private javax.swing.JTextField campoQuantidade;
     private javax.swing.JTextField campoTotalVenda;
