@@ -35,11 +35,11 @@ public class VendaDAO {
         try {
             stmt = con.prepareStatement(
                     "INSERT INTO vendas (data, valor_total, quantidade, semente)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "VALUES(?,?,?,?)");
             /////////////////////////////////
 
             ///////////////////////////////////
-            stmt.setString(1, v.getDataVenda());
+            stmt.setDate(1, v.getDataVenda());
             stmt.setFloat(2, v.getValorTotal());
             stmt.setInt(3, v.getQuantidade());
             stmt.setString(4, v.getSementes());
@@ -74,7 +74,7 @@ public class VendaDAO {
                 /////////////////////////////////
                 Venda v = new Venda();
                 ///////////////////////////////////
-                v.setDataVenda(rs.getString("data"));
+                v.setDataVenda(rs.getDate("data"));
                 v.setValorTotal(rs.getFloat("valor_total"));
                 v.setQuantidade(rs.getInt("quantidade"));
                 v.setSementes(rs.getString("semente"));
@@ -107,8 +107,8 @@ public class VendaDAO {
                     "SELECT data, valor_total, quantidade, semente"
                     + "FROM vendas WHERE idvenda = id");
             }
-            rs.getString(v.getDataVenda());
-            JOptionPane.showInputDialog( rs.getString(v.getDataVenda()));
+            rs.getInt(v.getIdVenda());
+            JOptionPane.showInputDialog( rs.getInt(v.getIdVenda()));
             ///COMPLETAR
             
         } catch (SQLException ex) {

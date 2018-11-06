@@ -6,21 +6,27 @@
 package janelas;
 
 import DAO.SementeDAO;
+import DAO.VendaDAO;
 import classes.Semente;
 import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jframes.TesteTabela;
+import classes.Venda;
 
 /**
  *
@@ -258,6 +264,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
 
     private void botaoFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarCompraActionPerformed
         // TODO add your handling code here:
+        finalizarVenda();
     }//GEN-LAST:event_botaoFinalizarCompraActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -375,8 +382,6 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
 
     }
     
-    
-    
     public void adicionarAoCarrinho(){
         
         totalVendas = totalVendas + Float.parseFloat((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 4));
@@ -400,6 +405,25 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     
     public void finalizarVenda(){
         
+        Date data = new Date(System.currentTimeMillis());
+        //SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date dataSql = new java.sql.Date(data.getTime());
+        
+        Venda v = new Venda();
+        v.setQuantidade(Integer.parseInt(campoQuantidade.getText()));
+        v.setValorTotal(Float.parseFloat(campoTotalVenda.getText()));
+        v.setDataVenda(dataSql);
+        
+        VendaDAO dao = new VendaDAO();
+        
+        try {
+            dao.salvar(v);
+            JOptionPane.showMessageDialog(rootPane, "Venda realizada com Sucesso!");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
