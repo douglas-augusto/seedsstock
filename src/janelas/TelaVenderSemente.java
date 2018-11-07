@@ -5,8 +5,10 @@
  */
 package janelas;
 
+import DAO.FornecedorDAO;
 import DAO.SementeDAO;
 import DAO.VendaDAO;
+import classes.Fornecedor;
 import classes.Semente;
 import conection.MakeConnection;
 import java.awt.Dimension;
@@ -37,7 +39,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     float totalVendas = 0;
     int quantidade = 0;
     ArrayList<String> listaVenda = new ArrayList();
+    ////////////////////////////////////////////////
     
+    DefaultTableModel dtmVenda;
+    ArrayList<Semente> arraySemente;
+
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
 
@@ -51,18 +57,14 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
      
      */
     
-    DefaultTableModel dtmBusca;
-    ArrayList<Semente> arraySementesVenda = new ArrayList();
-    
     public TelaVenderSemente() {
         initComponents();
         
-          try {
-            carregaArray();
+        try {
+            CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        carregaTabela();
         
         setTitle("Vender Sementes");
         setBounds(100, 100, 800, 600);
@@ -107,6 +109,11 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         campoPesquisaVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPesquisaVendasActionPerformed(evt);
+            }
+        });
+        campoPesquisaVendas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoPesquisaVendasKeyReleased(evt);
             }
         });
 
@@ -274,12 +281,13 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
 
     private void campoPesquisaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaVendasActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_campoPesquisaVendasActionPerformed
 
     private void botaoAddAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddAoCarrinhoActionPerformed
         // TODO add your handling code here:
         try{
-        adicionarAoCarrinho();
+        //adicionarAoCarrinho();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Selecione um ítem para o carrinho", "Ação inválida", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -290,108 +298,63 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         zerarCarrinho();
     }//GEN-LAST:event_botaoZerarCarrinhoActionPerformed
 
-    
-    public void carregaArray() throws ClassNotFoundException {
-        Connection con = MakeConnection.getConnection();
-        PreparedStatement stmt = null;
-
-        ResultSet rs = null;
-
-        int cont = 0;
-       
-       // sementeDAO sDao = new sementeDAO();
+    private void campoPesquisaVendasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaVendasKeyReleased
+        // TODO add your handling code here:
         try {
-            stmt = con.prepareStatement("SELECT * FROM sementes ORDER BY nome ASC");
-            rs = stmt.executeQuery();
-
-            arraySementesVenda.clear();
-            while (rs.next()) {
-                /////////////////////////////////
-                Semente semente = new Semente();
-                ///////////////////////////////////
-                semente.setIdsemente(rs.getInt("idsemente"));
-                semente.setNome(rs.getString("nome"));
-                semente.setEspecie(rs.getString("especie"));
-                semente.setQuant(rs.getInt("quant"));
-                semente.setRaridade(rs.getString("raridade"));
-                semente.setDia_col(rs.getInt("dia_col"));
-                semente.setMes_col(rs.getInt("mes_col"));
-                semente.setAno_col(rs.getInt("ano_col"));
-                semente.setDia_val(rs.getInt("dia_val"));
-                semente.setMes_val(rs.getInt("mes_val"));
-                semente.setAno_val(rs.getInt("ano_val"));
-
-                semente.setPreco_compra(rs.getFloat("preco_compra"));
-                semente.setPreco_venda(rs.getFloat("preco_venda"));
-
-                semente.setOrigem(rs.getString("origem"));
-                semente.setFornecedor(rs.getString("fornecedor"));
-                semente.setCondicoes_plantil(rs.getString("condicoes_plantil"));
-                semente.setObservacoes(rs.getString("observacoes"));
-
-                arraySementesVenda.add(semente);
-
-                //Preenchendo tabela
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            MakeConnection.closeConnection(con, stmt, rs);
+            CarregaTabela("SELECT * FROM sementes where nome LIKE '%" + campoPesquisaVendas.getText() + "%' ORDER BY nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void carregaTabela() {
-        DefaultTableModel dtmBusca;
+    }//GEN-LAST:event_campoPesquisaVendasKeyReleased
 
-        String[] colunas = {"Id Semente", "Nome", "Espécie", "Preço Compra", "Preço Venda"};
+    
+    public void CarregaTabela(String sql) throws ClassNotFoundException {
+
+        String[] colunas = {"Id", "Nome", "Especie", "Preço", "Quantidade"};
         String[] linha = new String[5];
 
-        dtmBusca = new DefaultTableModel(null, colunas);
+        dtmVenda = new DefaultTableModel(null, colunas);
+        
+        SementeDAO s = new SementeDAO();
 
-        //String sql = "SELECT * FROM sementes";
-        String sql = "SELECT * FROM sementes ORDER BY nome ASC";
+        ArrayList<Semente> array = (ArrayList<Semente>) s.read(sql);
 
-        dtmBusca = new DefaultTableModel(null, colunas);
+        arraySemente = array;
 
-        Connection con = null;
-        try {
-            con = MakeConnection.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < array.size(); i++) {
+            linha[0] = String.valueOf(array.get(i).getIdsemente());
+            linha[1] = array.get(i).getNome();
+            linha[2] = array.get(i).getEspecie();
+            linha[3] = String.valueOf(array.get(i).getPreco_venda());
+            linha[4] = String.valueOf(array.get(i).getQuant());
+            dtmVenda.addRow(linha);
         }
-
-        Statement stmt;
-        try {
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                linha[0] = rs.getString("idsemente");
-                linha[1] = rs.getString("nome");
-                linha[2] = rs.getString("especie");
-                linha[3] = rs.getString("preco_compra");
-                linha[4] = rs.getString("preco_venda");
-                dtmBusca.addRow(linha);
-            }
-            tabelaVendas.setModel(dtmBusca);
-            dtmBusca.fireTableDataChanged();
-        } catch (SQLException ex) {
-            //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+      
+        tabelaVendas.setModel(dtmVenda);
+        dtmVenda.fireTableDataChanged();
     }
     
-    public void adicionarAoCarrinho(){
+   /* public void adicionarAoCarrinho(){
         
-        totalVendas = totalVendas + Float.parseFloat((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 4));
-        quantidade++;
-        listaVenda.add((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 1));
+        int qtdSementes = Integer.parseInt((arraySemente.get(tabelaVendas.getSelectedRow()).getQuant())); 
         
-        campoTotalVenda.setText(String.valueOf(totalVendas));
-        campoQuantidade.setText(String.valueOf(quantidade));
-           
-    }
+        if(qtdSementes == 0){
+             JOptionPane.showMessageDialog(rootPane, "Impossível adicionar ao carrinho, não possue em estoque!");
+        }else{
+            totalVendas = totalVendas + Float.parseFloat((arraySemente.get(tabelaVendas.getSelectedRow()).getPreco_venda()));
+            quantidade++;
+            listaVenda.add(arraySemente.get(tabelaVendas.getSelectedRow()).getNome());
+        
+            campoTotalVenda.setText(String.valueOf(totalVendas));
+            campoQuantidade.setText(String.valueOf(quantidade));
+            
+            qtdSementes--;
+            
+            tabelaVendas.setValueAt(qtdSementes, tabelaVendas.getSelectedRow(), 5);    
+ 
+        }
+        
+    }*/
     
     public void zerarCarrinho(){
         

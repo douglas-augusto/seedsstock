@@ -55,6 +55,37 @@ public class VendaDAO {
         }
         return result;
     }
+    
+     public boolean AtualizarQuantidadeSemente(Semente s) throws ClassNotFoundException, SQLException {
+
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        boolean result = false;
+
+        try {
+            stmt = con.prepareStatement(
+                    "UPDATE sementes SET quant = ? WHERE idsemente = ?");
+            /////////////////////////////////
+
+            ///////////////////////////////////
+            stmt.setInt(1, s.getQuant());
+            
+            stmt.executeUpdate();
+            //JOptionPane.showMessageDialog(null,"Dados alterados com sucesso com sucesso!");
+            result = true;
+            //DESCOMENTAR DEPOIS
+            //JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro, verifique estoque");
+            //JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
+            result = false;
+            System.out.println(ex);
+        } finally {
+            MakeConnection.closeConnection(con, stmt);
+        }
+        return result;
+    }
 
     //List<Semente>
     public List<Venda> read(String sql) throws ClassNotFoundException {

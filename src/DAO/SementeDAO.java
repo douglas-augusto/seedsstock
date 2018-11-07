@@ -30,7 +30,6 @@ public class SementeDAO {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        boolean result = false;
 
         try {
             stmt = con.prepareStatement(
@@ -61,18 +60,17 @@ public class SementeDAO {
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Semente cadastrada com sucesso!");
-            result = true;
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Cadastrar: " + ex);
             System.out.println(ex);
-           result = false; 
+           return false; 
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-        return result;
+//        
     }
-
-    //List<Semente>
+    
     public List<Semente> read(String sql) throws ClassNotFoundException {
 
         Connection con = MakeConnection.getConnection();
@@ -80,8 +78,7 @@ public class SementeDAO {
         
         ResultSet rs = null;
         
-        //boolean result = false;
-        //List<Pessoa> pessoasSql = new ArrayList<>();
+  
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -90,6 +87,7 @@ public class SementeDAO {
                 /////////////////////////////////
                 Semente semente = new Semente();
                 ///////////////////////////////////
+                semente.setIdsemente(rs.getInt("idsemente"));
                 semente.setNome(rs.getString("nome"));
                 semente.setEspecie(rs.getString("especie"));
                 semente.setQuant(rs.getInt("quant"));
@@ -202,15 +200,11 @@ public class SementeDAO {
         return result;
     }
 
-    public boolean excluir(int id) throws ClassNotFoundException, SQLException {
+    public boolean excluir(int id) throws ClassNotFoundException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        PreparedStatement stmts = null;
-        boolean result = false;
-        //stmt.executeUpdate();
-
-
+        
         try {
             
             stmt = con.prepareStatement("DELETE FROM sementes WHERE idsemente = ?");
@@ -219,17 +213,17 @@ public class SementeDAO {
             stmt.setInt(1, id);
 
             stmt.executeUpdate();
-            //DESCOMENTAR DEPOIS
-            //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-            result = true;
+            
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir dao: " + ex);
             System.out.println(ex);
-            result = false;
+            return false;
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-        return result;
+        
     }
 
     public void read() throws ClassNotFoundException {

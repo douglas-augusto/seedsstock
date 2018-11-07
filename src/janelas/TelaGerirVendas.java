@@ -202,6 +202,10 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
             
             dtmBusca.removeRow(tabelaGerirVendas.getSelectedRow());
             dtmBusca.fireTableDataChanged();
+            
+           tabelaGerirVendas.repaint();
+            
+        tabelaGerirVendas.revalidate();
 
         }
     }//GEN-LAST:event_botaoCancelarVendaActionPerformed

@@ -28,34 +28,24 @@ public class Home extends javax.swing.JFrame {
     
     //Instanciar as JInternalFrames
    TelaAddSemente telaCadSemente = new TelaAddSemente();
-   TelaAlterarSemente telaAltSemente = new TelaAlterarSemente();
-   TelaApagarSemente telaDelSemente = new TelaApagarSemente();
-   
-   TelaBuscarImprimir telaBuscSemente = new TelaBuscarImprimir();
    TelaBalancos telaBalSemente = new TelaBalancos();
    TelaGerirVendas telaGerVendas = new TelaGerirVendas();
     
    TelaGerirFornecedor telaGerFornecedor = new TelaGerirFornecedor();
    TelaVenderSemente telaVenderSemente = new TelaVenderSemente();
    TelaAddFornecedor telaAddFornecedor = new TelaAddFornecedor();
-   
-   TelaListarSemente telaListarSemente = new TelaListarSemente();
+  
+   TelaGerirSemente telaGerirSemente = new TelaGerirSemente();
    
    
    private void fecharJanelas(){
-       telaCadSemente.setVisible(false);
-       telaAltSemente.setVisible(false);
-       telaDelSemente.setVisible(false);
-       
-       telaBuscSemente.setVisible(false);
-       telaBalSemente.setVisible(false);
-       telaGerVendas.setVisible(false);
-       
-       telaGerFornecedor.setVisible(false);
-       telaVenderSemente.setVisible(false);
-       telaAddFornecedor.setVisible(false);
-       
-       telaListarSemente.setVisible(false);           
+       telaCadSemente.dispose();
+       telaBalSemente.dispose();
+       telaGerVendas.dispose();
+       telaGerirSemente.dispose();
+       telaGerFornecedor.dispose();
+       telaVenderSemente.dispose();
+       telaAddFornecedor.dispose();
        
    }
   
@@ -92,8 +82,6 @@ public class Home extends javax.swing.JFrame {
         botaoVender = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         botaoAltSemente = new javax.swing.JLabel();
-        botaoDelSemente = new javax.swing.JLabel();
-        botaoBuscarSemente = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         botaoBalancos = new javax.swing.JLabel();
         botaoGerirVendas = new javax.swing.JLabel();
@@ -163,20 +151,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        botaoDelSemente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete.png"))); // NOI18N
-        botaoDelSemente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoDelSementeMouseClicked(evt);
-            }
-        });
-
-        botaoBuscarSemente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png"))); // NOI18N
-        botaoBuscarSemente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoBuscarSementeMouseClicked(evt);
-            }
-        });
-
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         botaoBalancos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Pie Chart.png"))); // NOI18N
@@ -223,10 +197,6 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoAltSemente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoDelSemente)
-                .addGap(8, 8, 8)
-                .addComponent(botaoBuscarSemente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoBalancos)
@@ -238,7 +208,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(botaoCadFornecedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoGerirFornecedor)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,8 +220,6 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botaoGerirFornecedor)
                     .addComponent(botaoGerirVendas)
-                    .addComponent(botaoBuscarSemente)
-                    .addComponent(botaoDelSemente)
                     .addComponent(botaoVender)
                     .addComponent(botaoCadSemente)
                     .addComponent(botaoAltSemente)
@@ -475,27 +443,10 @@ public class Home extends javax.swing.JFrame {
     private void botaoAltSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAltSementeMouseClicked
         // TODO add your handling code here:
         fecharJanelas();
-        painelCentral.add(telaAltSemente);
-        telaAltSemente.setVisible(true);
-        telaAltSemente.setPosition();
+        painelCentral.add(telaGerirSemente);
+        telaGerirSemente.setVisible(true);
+        telaGerirSemente.setPosition();
     }//GEN-LAST:event_botaoAltSementeMouseClicked
-
-    private void botaoDelSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoDelSementeMouseClicked
-        // TODO add your handling code here:
-        fecharJanelas();
-        painelCentral.add(telaDelSemente);
-        telaDelSemente.setVisible(true);
-        telaDelSemente.setPosition();
-    }//GEN-LAST:event_botaoDelSementeMouseClicked
-
-    private void botaoBuscarSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarSementeMouseClicked
-        // TODO add your handling code here:
-        fecharJanelas();
-        painelCentral.add(telaBuscSemente);
-        telaBuscSemente.setVisible(true);
-        telaBuscSemente.setPosition();
-       
-    }//GEN-LAST:event_botaoBuscarSementeMouseClicked
 
     private void botaoBalancosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBalancosMouseClicked
         fecharJanelas();
@@ -548,9 +499,9 @@ public class Home extends javax.swing.JFrame {
     private void menuAltSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAltSementeActionPerformed
         // TODO add your handling code here:
         fecharJanelas();
-        painelCentral.add(telaAltSemente);
-        telaAltSemente.setVisible(true);
-        telaAltSemente.setPosition();
+        painelCentral.add(telaGerirSemente);
+        telaGerirSemente.setVisible(true);
+        telaGerirSemente.setPosition();
     }//GEN-LAST:event_menuAltSementeActionPerformed
 
     private void menuAltFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAltFornecedorActionPerformed
@@ -566,16 +517,16 @@ public class Home extends javax.swing.JFrame {
     private void menuDelSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDelSementeActionPerformed
         // TODO add your handling code here:
         fecharJanelas();
-        painelCentral.add(telaDelSemente);
-        telaDelSemente.setVisible(true);
-        telaDelSemente.setPosition();
+        painelCentral.add(telaGerirSemente);
+        telaGerirSemente.setVisible(true);
+        telaGerirSemente.setPosition();
     }//GEN-LAST:event_menuDelSementeActionPerformed
 
     private void menuListSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListSementeActionPerformed
         fecharJanelas();
-        painelCentral.add(telaListarSemente);
-        telaListarSemente.setVisible(true);
-        telaListarSemente.setPosition();
+        painelCentral.add(telaGerirSemente);
+        telaGerirSemente.setVisible(true);
+        telaGerirSemente.setPosition();
         
     }//GEN-LAST:event_menuListSementeActionPerformed
 
@@ -632,10 +583,8 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botaoAltSemente;
     private javax.swing.JLabel botaoBalancos;
-    private javax.swing.JLabel botaoBuscarSemente;
     private javax.swing.JLabel botaoCadFornecedor;
     private javax.swing.JLabel botaoCadSemente;
-    private javax.swing.JLabel botaoDelSemente;
     private javax.swing.JLabel botaoGerirFornecedor;
     private javax.swing.JLabel botaoGerirVendas;
     private javax.swing.JLabel botaoVender;

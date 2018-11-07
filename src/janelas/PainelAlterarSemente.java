@@ -8,8 +8,12 @@ package janelas;
 import DAO.SementeDAO;
 import classes.Semente;
 import classes.teclasPermitidas;
+import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +23,7 @@ import javax.swing.ButtonGroup;
  *
  * @author douglas
  */
-public class PainelAlterar extends javax.swing.JFrame {
+public class PainelAlterarSemente extends javax.swing.JFrame {
 
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
@@ -27,7 +31,7 @@ public class PainelAlterar extends javax.swing.JFrame {
     ButtonGroup grupoRadios;
     int idSemente;
 
-    private PainelAlterar() {
+    private PainelAlterarSemente() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -39,7 +43,7 @@ public class PainelAlterar extends javax.swing.JFrame {
      * Creates new form PainelAlterar
      */
 
-    public PainelAlterar(Semente s) {
+    public PainelAlterarSemente(Semente s) {
         grupoRadios = new ButtonGroup();
         initComponents();
         setTitle("Alterar Dados");
@@ -56,6 +60,12 @@ public class PainelAlterar extends javax.swing.JFrame {
         jTextField8.setDocument(new teclasPermitidas("[^0-9 | ^.]", ""));
 
         carregaTextFields(s);
+        
+        try {
+            carregaChoiceFornecedor();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         setTitle("Alterar Sementes");
         setBounds(100, 100, 800, 600);
@@ -97,7 +107,7 @@ public class PainelAlterar extends javax.swing.JFrame {
         radioD = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botaoSalvarAlteracoes = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -292,11 +302,11 @@ public class PainelAlterar extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save.png"))); // NOI18N
-        jButton1.setText("Salvar Alterações");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoSalvarAlteracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save.png"))); // NOI18N
+        botaoSalvarAlteracoes.setText("Salvar Alterações");
+        botaoSalvarAlteracoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoSalvarAlteracoesActionPerformed(evt);
             }
         });
 
@@ -366,7 +376,7 @@ public class PainelAlterar extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botaoSalvarAlteracoes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botaoCancelar)))
                 .addContainerGap())
@@ -386,7 +396,7 @@ public class PainelAlterar extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botaoSalvarAlteracoes)
                     .addComponent(botaoCancelar))
                 .addContainerGap())
         );
@@ -402,15 +412,21 @@ public class PainelAlterar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_radioAActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoSalvarAlteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarAlteracoesActionPerformed
    
         lerTextFields();       
-        dispose();
-        // limpaTextFields();
-        // TelaAlterarSemente tabela = new TelaAlterarSemente();
-        // tabela.dtmBusca.fireTableDataChanged();
+        
+        TelaGerirSemente gerir = new TelaGerirSemente();
+        
+        try {
+            gerir.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dispose();
+
+    }//GEN-LAST:event_botaoSalvarAlteracoesActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         // TODO add your handling code here:
@@ -434,21 +450,27 @@ public class PainelAlterar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PainelAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PainelAlterarSemente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PainelAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PainelAlterarSemente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PainelAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PainelAlterarSemente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PainelAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PainelAlterarSemente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PainelAlterar().setVisible(true);
+                new PainelAlterarSemente().setVisible(true);
             }
         });
     }
@@ -456,8 +478,8 @@ public class PainelAlterar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alterarNome;
     private javax.swing.JButton botaoCancelar;
+    private javax.swing.JButton botaoSalvarAlteracoes;
     private java.awt.Choice choice1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -539,7 +561,7 @@ public class PainelAlterar extends javax.swing.JFrame {
         jTextField8.setText(Float.toString(s.getPreco_venda()));
 
         jTextField12.setText(s.getOrigem());
-        // choice1.setText(s.getFornecedor());
+        //choice1.setText(s.getFornecedor());
         jTextArea1.setText(s.getCondicoes_plantil());
         jTextArea2.setText(s.getObservacoes());
 
@@ -622,17 +644,42 @@ public class PainelAlterar extends javax.swing.JFrame {
         s.setCondicoes_plantil(jTextArea1.getText());
         s.setObservacoes(jTextArea2.getText());
 
-        System.out.println("teste ");
-
-        SementeDAO dao = new SementeDAO();
+        SementeDAO sdao = new SementeDAO();
         
         try {
-            dao.Alterar(s);
+            sdao.Alterar(s);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PainelAlterar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PainelAlterarSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(PainelAlterar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PainelAlterarSemente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void carregaChoiceFornecedor() throws ClassNotFoundException{
+        
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        
+        ResultSet rs = null;
+        
+        
+        //List<Pessoa> pessoasSql = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM fornecedores");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+               /////////////////////////////////
+               choice1.add(rs.getString("nome"));
+                   
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
     }
 }
