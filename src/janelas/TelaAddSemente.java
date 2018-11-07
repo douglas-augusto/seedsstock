@@ -71,11 +71,6 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         jTextField8.setDocument(new teclasPermitidas("[^0-9 | ^.]", ""));
          
          // Carrega Choice Fornecedor
-        try {
-            carregaChoiceFornecedor();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
-        }
        
         
         setBounds(100, 100, 800, 600);
@@ -454,7 +449,7 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_botaoFecharActionPerformed
 
     private void radioAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAActionPerformed
@@ -618,6 +613,8 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
     
     public void carregaChoiceFornecedor() throws ClassNotFoundException{
         
+        choice1.removeAll();
+        
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
         
@@ -643,7 +640,5 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         }
     
     }
-    
-    
-    
+
 }

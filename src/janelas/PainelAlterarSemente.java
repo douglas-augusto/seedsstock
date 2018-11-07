@@ -425,12 +425,13 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
         }
 
         dispose();
+        
 
     }//GEN-LAST:event_botaoSalvarAlteracoesActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     /**
@@ -657,6 +658,8 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
     }
     
     public void carregaChoiceFornecedor() throws ClassNotFoundException{
+        
+        choice1.removeAll();
         
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;

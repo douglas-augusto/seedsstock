@@ -200,7 +200,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
@@ -239,7 +239,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         PainelAlterarFornecedor alterar = new PainelAlterarFornecedor(arrayF_aux.get(jTable1.getSelectedRow()));
         alterar.setVisible(true);
-
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

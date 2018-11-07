@@ -201,7 +201,7 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void campoBuscaSementeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscaSementeKeyReleased
@@ -240,6 +240,12 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         PainelAlterarSemente alterar = new PainelAlterarSemente(arraySemente.get(tabelaSementesGeral.getSelectedRow()));
         alterar.setVisible(true);
+        try {
+            alterar.carregaChoiceFornecedor();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerirSemente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
 
     }//GEN-LAST:event_botaoAlterarSementeActionPerformed
 

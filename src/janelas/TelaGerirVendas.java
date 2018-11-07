@@ -40,7 +40,9 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
 
     /** Creates new form TelaGerirVendas */
     public TelaGerirVendas() {
+        
         initComponents();
+        
         
         try {
             carregaArray();
@@ -178,7 +180,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void campoBuscarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarVendaActionPerformed

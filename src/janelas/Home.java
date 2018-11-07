@@ -424,6 +424,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaCadSemente);
         telaCadSemente.setVisible(true);
         telaCadSemente.setPosition();
+        try {
+            telaCadSemente.carregaChoiceFornecedor();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuCadSementeActionPerformed
 
     private void menuListFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListFornecedorActionPerformed
@@ -436,8 +441,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaCadSemente); 
         telaCadSemente.setVisible(true);
         telaCadSemente.setPosition();
-        
-        
+        try {
+            telaCadSemente.carregaChoiceFornecedor();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoCadSementeMouseClicked
 
     private void botaoAltSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAltSementeMouseClicked
@@ -446,6 +454,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerirSemente);
         telaGerirSemente.setVisible(true);
         telaGerirSemente.setPosition();
+        try {
+            telaGerirSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoAltSementeMouseClicked
 
     private void botaoBalancosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBalancosMouseClicked
@@ -477,6 +490,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerFornecedor);
         telaGerFornecedor.setVisible(true);
         telaGerFornecedor.setPosition();
+        try {
+            telaGerFornecedor.CarregaTabela("SELECT * FROM fornecedores ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
     }//GEN-LAST:event_botaoGerirFornecedorMouseClicked
 
@@ -485,6 +503,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaVenderSemente);
         telaVenderSemente.setVisible(true);
         telaVenderSemente.setPosition();
+        try {
+            telaVenderSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
     }//GEN-LAST:event_botaoVenderMouseClicked
 
@@ -493,6 +516,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaVenderSemente);
         telaVenderSemente.setVisible(true);
         telaVenderSemente.setPosition();
+        try {
+            telaVenderSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_menuNovaVendaActionPerformed
 
@@ -502,6 +530,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerirSemente);
         telaGerirSemente.setVisible(true);
         telaGerirSemente.setPosition();
+        try {
+            telaGerirSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuAltSementeActionPerformed
 
     private void menuAltFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAltFornecedorActionPerformed
@@ -520,6 +553,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerirSemente);
         telaGerirSemente.setVisible(true);
         telaGerirSemente.setPosition();
+        try {
+            telaGerirSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuDelSementeActionPerformed
 
     private void menuListSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListSementeActionPerformed
@@ -527,6 +565,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerirSemente);
         telaGerirSemente.setVisible(true);
         telaGerirSemente.setPosition();
+        try {
+            telaGerirSemente.CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_menuListSementeActionPerformed
 
