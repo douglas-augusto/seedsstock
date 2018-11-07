@@ -22,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import jframes.TesteTabela;
 
 /**
  *
@@ -46,7 +45,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
         try {
             carregaArray();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaGerirVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         carregaTabela();
@@ -274,7 +273,7 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
         try {
             con = MakeConnection.getConnection();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TesteTabela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaGerirVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Statement stmt;

@@ -22,7 +22,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import jframes.AddSemente;
+
 
 /**
  *
@@ -595,9 +595,9 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
             dao.salvar(s);
             JOptionPane.showMessageDialog(rootPane, "Cadastro Efetuado com Sucesso!");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddSemente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AddSemente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
