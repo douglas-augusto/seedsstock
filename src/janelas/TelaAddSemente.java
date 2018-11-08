@@ -434,13 +434,13 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         lerTextFields();
-      
-       
         limpaTextFields();
-       
-      
         dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Ação inválida, confira os campos de cadastro");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -588,7 +588,6 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         SementeDAO dao = new SementeDAO();
         try {
             dao.salvar(s);
-            JOptionPane.showMessageDialog(rootPane, "Cadastro Efetuado com Sucesso!");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

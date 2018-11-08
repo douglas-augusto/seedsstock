@@ -10,6 +10,7 @@ import classes.Fornecedor;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -327,6 +328,7 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         lerTextFields();
 
         TelaGerirFornecedor gerir = new TelaGerirFornecedor();
@@ -338,6 +340,9 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
         }
 
         dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Ouve um erro no sistema!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

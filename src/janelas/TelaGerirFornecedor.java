@@ -214,32 +214,36 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
+        try{
+            int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arrayF_aux.get(jTable1.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
+            if (i == 0) {
 
-        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arrayF_aux.get(jTable1.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
-        if (i == 0) {
-            
-          
-            FornecedorDAO fdao = new FornecedorDAO();
 
-            try {
-                boolean excluir = fdao.excluir(arrayF_aux.get(jTable1.getSelectedRow()).getIdfornecedor());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                FornecedorDAO fdao = new FornecedorDAO();
+
+                try {
+                    boolean excluir = fdao.excluir(arrayF_aux.get(jTable1.getSelectedRow()).getIdfornecedor());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                dtmFornecedor.removeRow(jTable1.getSelectedRow());
+                dtmFornecedor.fireTableDataChanged();
             }
-            
-            dtmFornecedor.removeRow(jTable1.getSelectedRow());
-            dtmFornecedor.fireTableDataChanged();
-
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Selecione um fornecedor para ser apagado do sistema!");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         PainelAlterarFornecedor alterar = new PainelAlterarFornecedor(arrayF_aux.get(jTable1.getSelectedRow()));
         alterar.setVisible(true);
         this.dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Selecione um fornecedor para ser alterado no sistema!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

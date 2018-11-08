@@ -44,11 +44,12 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
      */
 
     public PainelAlterarSemente(Semente s) {
-        grupoRadios = new ButtonGroup();
+       
         initComponents();
         setTitle("Alterar Dados");
 
         // Botões Radio
+        grupoRadios = new ButtonGroup();
         grupoRadios.add(radioA);
         grupoRadios.add(radioB);
         grupoRadios.add(radioC);
@@ -426,7 +427,6 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
 
         dispose();
         
-
     }//GEN-LAST:event_botaoSalvarAlteracoesActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
@@ -523,11 +523,11 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
         jTextField2.setText(s.getEspecie());
         jTextField3.setText(Integer.toString(s.getQuant()));
         ////// Raridade
-        if (s.getRaridade() == "A") {
+        if (s.getRaridade().equals("A")) {
             radioA.isSelected();
-        } else if (s.getRaridade() == "B") {
+        } else if (s.getRaridade().equals("B")) {
             radioB.isSelected();
-        } else if (s.getRaridade() == "C") {
+        } else if (s.getRaridade().equals("C")) {
             radioC.isSelected();
         } else {
             radioD.isSelected();

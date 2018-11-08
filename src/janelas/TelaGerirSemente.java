@@ -215,38 +215,42 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoBuscaSementeKeyReleased
 
     private void botaoApagarSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoApagarSementeActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
+        try{
+            int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arraySemente.get(tabelaSementesGeral.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
+            if (i == 0) {
 
-        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente REMOVER (" + arraySemente.get(tabelaSementesGeral.getSelectedRow()).getNome() + ") do Sistema?", "Excluir", JOptionPane.OK_OPTION);
-        if (i == 0) {
-            
-          
-            SementeDAO sdao = new SementeDAO();
 
-            try {
-                boolean excluir = sdao.excluir(arraySemente.get(tabelaSementesGeral.getSelectedRow()).getIdsemente());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaGerirSemente.class.getName()).log(Level.SEVERE, null, ex);
+                SementeDAO sdao = new SementeDAO();
+
+                try {
+                    boolean excluir = sdao.excluir(arraySemente.get(tabelaSementesGeral.getSelectedRow()).getIdsemente());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TelaGerirSemente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                dtmSemente.removeRow(tabelaSementesGeral.getSelectedRow());
+                dtmSemente.fireTableDataChanged();
+
             }
-            
-            dtmSemente.removeRow(tabelaSementesGeral.getSelectedRow());
-            dtmSemente.fireTableDataChanged();
-
+        }catch(Exception ex){
+           JOptionPane.showMessageDialog(rootPane, "Selecione uma semente para ser apagada do sistema!");
         }
     }//GEN-LAST:event_botaoApagarSementeActionPerformed
 
     private void botaoAlterarSementeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlterarSementeActionPerformed
         // TODO add your handling code here:
-        PainelAlterarSemente alterar = new PainelAlterarSemente(arraySemente.get(tabelaSementesGeral.getSelectedRow()));
-        alterar.setVisible(true);
-        try {
-            alterar.carregaChoiceFornecedor();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaGerirSemente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
-
+       try{
+            PainelAlterarSemente alterar = new PainelAlterarSemente(arraySemente.get(tabelaSementesGeral.getSelectedRow()));
+            alterar.setVisible(true);
+            try {
+                alterar.carregaChoiceFornecedor();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaGerirSemente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(rootPane, "Selecione uma semente para ser alterada no sistema!");
+       }
     }//GEN-LAST:event_botaoAlterarSementeActionPerformed
 
     private void botaoAlterarSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAlterarSementeMouseClicked
