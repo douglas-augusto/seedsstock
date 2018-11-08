@@ -466,6 +466,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaBalSemente);
         telaBalSemente.setVisible(true);
         telaBalSemente.setPosition();
+        try {
+            telaBalSemente.CarregaTabela("SELECT * FROM vendas ORDER by data ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoBalancosMouseClicked
 
     private void botaoGerirVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGerirVendasMouseClicked
