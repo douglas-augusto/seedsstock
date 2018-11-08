@@ -7,7 +7,9 @@
 package janelas;
 
 import DAO.FornecedorDAO;
+import DAO.SementeDAO;
 import DAO.VendaDAO;
+import classes.Semente;
 import classes.Venda;
 import conection.MakeConnection;
 import java.awt.Dimension;
@@ -31,8 +33,9 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
+    
     DefaultTableModel dtmBusca;
-    ArrayList<Venda> arrayVendas = new ArrayList();
+    ArrayList<Venda> arrayVendas;
 
     public void setPosition() {
         this.setLocation((d.width - this.getSize().width) /2, (d.height - this.getSize().height) / 6);
@@ -43,14 +46,12 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
         
         initComponents();
         
-        
         try {
-            carregaArray();
+            CarregaTabela("SELECT * FROM vendas ORDER by data ASC");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaGerirVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        carregaTabela();
         
         setTitle("Minhas Vendas");
         setBounds(100, 100, 800, 600);
@@ -188,26 +189,27 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoBuscarVendaActionPerformed
 
     private void botaoCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarVendaActionPerformed
-        // TODO add your handling code here:
-        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar a compra?", "Cancelar compra", JOptionPane.OK_OPTION);
-        if (i == 0) {
-            
-          
-            VendaDAO vdao = new VendaDAO();
+        try{
+            int i = JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar a venda?", "Cancelar venda", JOptionPane.OK_OPTION);
+            if (i == 0) {
 
-            try {
-                boolean excluir = vdao.excluir(arrayVendas.get(tabelaGerirVendas.getSelectedRow()).getIdVenda());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+
+                VendaDAO vdao = new VendaDAO();
+
+                try {
+                    boolean excluir = vdao.excluir(arrayVendas.get(tabelaGerirVendas.getSelectedRow()).getIdVenda());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TelaGerirFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                dtmBusca.removeRow(tabelaGerirVendas.getSelectedRow());
+                dtmBusca.fireTableDataChanged();
+
+               tabelaGerirVendas.repaint();
+               tabelaGerirVendas.revalidate();
             }
-            
-            dtmBusca.removeRow(tabelaGerirVendas.getSelectedRow());
-            dtmBusca.fireTableDataChanged();
-            
-           tabelaGerirVendas.repaint();
-            
-        tabelaGerirVendas.revalidate();
-
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma venda para ser cancelada!");
         }
     }//GEN-LAST:event_botaoCancelarVendaActionPerformed
 
@@ -223,78 +225,31 @@ public class TelaGerirVendas extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelaGerirVendas;
     // End of variables declaration//GEN-END:variables
 
-    public void carregaArray() throws ClassNotFoundException {
-        Connection con = MakeConnection.getConnection();
-        PreparedStatement stmt = null;
-
-        ResultSet rs = null;
-
-        int cont = 0;
-      
-        try {
-            stmt = con.prepareStatement("SELECT * FROM vendas ORDER BY data ASC");
-            rs = stmt.executeQuery();
-
-            arrayVendas.clear();
-            while (rs.next()) {
-                /////////////////////////////////
-                Venda v = new Venda();
-                ///////////////////////////////////
-                v.setIdVenda(rs.getInt("idvenda"));
-                v.setDataVenda(rs.getDate("data"));
-                v.setValorTotal(rs.getFloat("valor_total"));
-                v.setQuantidade(rs.getInt("quantidade"));
-                
-                
-                arrayVendas.add(v);
-
-                //Preenchendo tabela
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            MakeConnection.closeConnection(con, stmt, rs);
-        }
-    }
     
-    public void carregaTabela() {
-        DefaultTableModel dtmBusca;
-
+    
+    public void CarregaTabela(String sql) throws ClassNotFoundException {
+        
         String[] colunas = {"Id Venda", "Data", "Valor Total", "Quantidade"};
         String[] linha = new String[4];
 
         dtmBusca = new DefaultTableModel(null, colunas);
 
-        //String sql = "SELECT * FROM sementes";
-        String sql = "SELECT * FROM vendas ORDER BY data ASC";
+        VendaDAO vdao = new VendaDAO();
 
-        dtmBusca = new DefaultTableModel(null, colunas);
+        ArrayList<Venda> array = (ArrayList<Venda>) vdao.read(sql);
+        
+        arrayVendas = array;
 
-        Connection con = null;
-        try {
-            con = MakeConnection.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaGerirVendas.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < array.size(); i++) {
+            linha[0] = String.valueOf(array.get(i).getIdVenda());
+            linha[1] = String.valueOf(array.get(i).getDataVenda());
+            linha[2] = String.valueOf(array.get(i).getValorTotal());
+            linha[3] = String.valueOf(array.get(i).getQuantidade());
+            dtmBusca.addRow(linha);
         }
-
-        Statement stmt;
-        try {
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                linha[0] = rs.getString("idvenda");
-                linha[1] = rs.getString("data");
-                linha[2] = rs.getString("valor_total");
-                linha[3] = rs.getString("quantidade");
-                dtmBusca.addRow(linha);
-            }
-            tabelaGerirVendas.setModel(dtmBusca);
-            dtmBusca.fireTableDataChanged();
-        } catch (SQLException ex) {
-            //  Logger.getLogger(dtmBusca.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        tabelaGerirVendas.setModel(dtmBusca);
+        dtmBusca.fireTableDataChanged();
 
     }
     

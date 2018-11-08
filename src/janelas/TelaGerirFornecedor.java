@@ -41,7 +41,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
      * Creates new form TelaGerirFornecedor
      */
     DefaultTableModel dtmFornecedor;
-    ArrayList<Fornecedor> arrayF_aux;
+        ArrayList<Fornecedor> arrayF_aux;
 
     public TelaGerirFornecedor() {
         initComponents();

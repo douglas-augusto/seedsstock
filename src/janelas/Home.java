@@ -473,6 +473,11 @@ public class Home extends javax.swing.JFrame {
         painelCentral.add(telaGerVendas);
         telaGerVendas.setVisible(true);
         telaGerVendas.setPosition();
+        try {
+            telaGerVendas.CarregaTabela("SELECT * FROM vendas ORDER by data ASC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_botaoGerirVendasMouseClicked
 

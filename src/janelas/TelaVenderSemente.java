@@ -5,24 +5,14 @@
  */
 package janelas;
 
-import DAO.FornecedorDAO;
 import DAO.SementeDAO;
 import DAO.VendaDAO;
-import classes.Fornecedor;
 import classes.Semente;
-import conection.MakeConnection;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -286,7 +276,7 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
     private void botaoAddAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddAoCarrinhoActionPerformed
         // TODO add your handling code here:
         try{
-        //adicionarAoCarrinho();
+            adicionarAoCarrinho();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Selecione um ítem para o carrinho", "Ação inválida", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -333,14 +323,15 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         dtmVenda.fireTableDataChanged();
     }
     
-   /* public void adicionarAoCarrinho(){
+    public void adicionarAoCarrinho(){
         
-        int qtdSementes = Integer.parseInt((arraySemente.get(tabelaVendas.getSelectedRow()).getQuant())); 
-        
+        int qtdSementes = arraySemente.get(tabelaVendas.getSelectedRow()).getQuant();
+        int idSemente = arraySemente.get(tabelaVendas.getSelectedRow()).getIdsemente();
+             
         if(qtdSementes == 0){
-             JOptionPane.showMessageDialog(rootPane, "Impossível adicionar ao carrinho, não possue em estoque!");
+             JOptionPane.showMessageDialog(rootPane, "Impossível adicionar ao carrinho, não possui em estoque!");
         }else{
-            totalVendas = totalVendas + Float.parseFloat((arraySemente.get(tabelaVendas.getSelectedRow()).getPreco_venda()));
+            totalVendas = totalVendas + arraySemente.get(tabelaVendas.getSelectedRow()).getPreco_venda();
             quantidade++;
             listaVenda.add(arraySemente.get(tabelaVendas.getSelectedRow()).getNome());
         
@@ -349,11 +340,28 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
             
             qtdSementes--;
             
-            tabelaVendas.setValueAt(qtdSementes, tabelaVendas.getSelectedRow(), 5);    
- 
-        }
+            Semente s = new Semente();
+            
+            s.setIdsemente(idSemente);
+            s.setQuant(qtdSementes);
+            
+            VendaDAO vdao = new VendaDAO();
         
-    }*/
+            try {
+                vdao.AtualizarQuantidadeSemente(s);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(PainelAlterarSemente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(PainelAlterarSemente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                CarregaTabela("SELECT * FROM sementes ORDER by nome ASC");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }     
+    }
     
     public void zerarCarrinho(){
         

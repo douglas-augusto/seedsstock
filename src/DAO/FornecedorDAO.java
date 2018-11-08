@@ -85,7 +85,6 @@ public class FornecedorDAO {
 
         ResultSet rs = null;
 
-        //List<Pessoa> pessoasSql = new ArrayList<>();
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -117,7 +116,6 @@ public class FornecedorDAO {
             MakeConnection.closeConnection(con, stmt, rs);
         }
 
-        //return pessoasSql;
         return arrayFornecedor;
     }
 

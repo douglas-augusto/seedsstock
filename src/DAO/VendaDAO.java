@@ -30,7 +30,6 @@ public class VendaDAO {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        boolean result = false;
         
         try {
             stmt = con.prepareStatement(
@@ -45,23 +44,22 @@ public class VendaDAO {
             stmt.setString(4, v.getSementes());
             
             stmt.executeUpdate();
-            result = true;
+            return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar: " + ex);
+            JOptionPane.showMessageDialog(null, "Houve um erro: " + ex);
             System.out.println(ex);
-           result = false; 
+           return false; 
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-        return result;
+ 
     }
     
      public boolean AtualizarQuantidadeSemente(Semente s) throws ClassNotFoundException, SQLException {
 
         Connection con = MakeConnection.getConnection();
         PreparedStatement stmt = null;
-        boolean result = false;
-
+        
         try {
             stmt = con.prepareStatement(
                     "UPDATE sementes SET quant = ? WHERE idsemente = ?");
@@ -69,25 +67,24 @@ public class VendaDAO {
 
             ///////////////////////////////////
             stmt.setInt(1, s.getQuant());
+            stmt.setInt(2, s.getIdsemente());
             
             stmt.executeUpdate();
-            //JOptionPane.showMessageDialog(null,"Dados alterados com sucesso com sucesso!");
-            result = true;
-            //DESCOMENTAR DEPOIS
-            //JOptionPane.showMessageDialog(null, "Dados alterados com Sucesso!");
+            
+            return true;
+         
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro, verifique estoque");
             //JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex);
-            result = false;
-            System.out.println(ex);
+            return false;
+            
         } finally {
             MakeConnection.closeConnection(con, stmt);
         }
-        return result;
+        
     }
 
-    //List<Semente>
     public List<Venda> read(String sql) throws ClassNotFoundException {
 
         Connection con = MakeConnection.getConnection();
@@ -95,8 +92,6 @@ public class VendaDAO {
         
         ResultSet rs = null;
         
-        //boolean result = false;
-        //List<Pessoa> pessoasSql = new ArrayList<>();
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -105,6 +100,7 @@ public class VendaDAO {
                 /////////////////////////////////
                 Venda v = new Venda();
                 ///////////////////////////////////
+                v.setIdVenda(rs.getInt("idvenda"));
                 v.setDataVenda(rs.getDate("data"));
                 v.setValorTotal(rs.getFloat("valor_total"));
                 v.setQuantidade(rs.getInt("quantidade"));
@@ -114,12 +110,11 @@ public class VendaDAO {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             MakeConnection.closeConnection(con, stmt, rs);
         }
-
-        //return pessoasSql;
+        
         return arrayVendas;
     }
     public Venda readId(int id) throws ClassNotFoundException, SQLException {
