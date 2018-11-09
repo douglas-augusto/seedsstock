@@ -407,6 +407,9 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaVenderSemente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        zerarCarrinho();
+        listaVenda.clear();
+        
     }
     
 
