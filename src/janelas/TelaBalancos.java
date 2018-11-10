@@ -42,9 +42,6 @@ public class TelaBalancos extends javax.swing.JInternalFrame {
     public TelaBalancos() {
         initComponents();
         
-        
-        
-        
          try {
             CarregaTabela("SELECT * FROM vendas ORDER by data ASC");
         } catch (ClassNotFoundException ex) {
@@ -266,11 +263,25 @@ public class TelaBalancos extends javax.swing.JInternalFrame {
     private void botaoBuscarBalancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarBalancoActionPerformed
         // TODO add your handling code here:
         try {
-            CarregaTabela("SELECT * FROM vendas WHERE data BETWEEN ('%" + jFormattedTextField3.getText() + "%') AND ('%" + jFormattedTextField4.getText() + "%');");
-            //JOptionPane.showMessageDialog(rootPane, jFormattedTextField3.getText());
+            CarregaTabela("SELECT * FROM vendas WHERE data BETWEEN '"+jFormattedTextField3.getText()+"' AND '"+jFormattedTextField4.getText()+"';");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaGerirVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
+        double count = 0;
+        int sacos = 0;
+        
+        for (int i=0; i<=tabelaBalanco.getRowCount()-1;i++) {
+            count += Double.parseDouble(tabelaBalanco.getValueAt(i, 2).toString());
+        }
+        
+        for (int i=0; i<=tabelaBalanco.getRowCount()-1;i++) {
+            sacos += Integer.parseInt(tabelaBalanco.getValueAt(i, 3).toString());
+        }
+        
+        campoTotalVendasBal.setText(String.valueOf(count));
+        campoSacosVendidos.setText(String.valueOf(sacos));
+        
     }//GEN-LAST:event_botaoBuscarBalancoActionPerformed
     
     public void CarregaTabela(String sql) throws ClassNotFoundException {
