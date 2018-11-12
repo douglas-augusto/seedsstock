@@ -65,7 +65,7 @@ public class Venda {
     }
     
     public boolean validarVenda(){
-        return true;
+        return validaDataVenda() && validaQtd() && validaSementes() && validaValorTotal();
     }
     
     public boolean validaDataVenda(){
@@ -85,6 +85,13 @@ public class Venda {
     }
     public boolean validaQtd(){
         if (quantidade <= 0) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    public boolean validaSementes(){
+        if (!"".equals(sementes)) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
