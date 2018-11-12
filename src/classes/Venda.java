@@ -64,4 +64,31 @@ public class Venda {
         this.sementes = sementes;
     }
     
+    public boolean validarVenda(){
+        return true;
+    }
+    
+    public boolean validaDataVenda(){
+        if (Pattern.compile("\\d{2}/\\d{2}/\\d{4}").matcher((CharSequence) dataVenda).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean validaValorTotal(){
+        if (valorTotal <= 0) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    public boolean validaQtd(){
+        if (quantidade <= 0) {
+            //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
+            return false;
+        }
+        return true;
+    }
+    
 }
