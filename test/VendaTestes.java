@@ -55,6 +55,31 @@ public class VendaTestes {
         v.setValorTotal(5);
         assertTrue("Deveria retornar falso", v.validaValorTotal());  
     }
+    @Test
+    public void testQtdVenda0(){
+        v.setQuantidade(0);
+        assertFalse("Deveria retornar falso", v.validaQtd());  
+    }
+    @Test
+    public void testQtdVendaNegativo(){
+        v.setQuantidade(-1);
+        assertFalse("Deveria retornar falso", v.validaQtd());  
+    }
+    @Test
+    public void testQtdVendaCorreto(){
+        v.setQuantidade(5);
+        assertTrue("Deveria retornar true", v.validaQtd());  
+    }
+    @Test
+    public void validaSementesVazio(){
+        v.setSementes("");
+        assertFalse("Deveria retornar falso", v.validaSementes());
+    }
+    @Test
+    public void validaSementesCorreto(){
+        v.setSementes("Morango");
+        assertTrue("Deveria retornar true", v.validaSementes());
+    }
     
     
 }

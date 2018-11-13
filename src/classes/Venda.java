@@ -91,7 +91,7 @@ public class Venda {
         return true;
     }
     public boolean validaSementes(){
-        if (!"".equals(sementes)) {
+        if ("".equals(sementes)) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
