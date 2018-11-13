@@ -1,5 +1,11 @@
 
 import classes.Venda;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +18,43 @@ import classes.Venda;
  * @author Sales Macedo
  */
 public class VendaTestes {
-    Venda v = new Venda();
+      Venda v;
+    
+    @Before
+    public void setUp() {
+        v = new Venda();
+    }
+    
+    @Test
+    public void testDataVendaVazio(){
+          Date date = null;
+      v.setDataVenda(date);
+        assertFalse("Deveria retornar falso", v.validaDataVenda());  
+    }
+    /*
+    @Test
+    public void testDataVendaCorreta(){
+        SimpleDateFormat sdf1 = new SimpleDateFormat("AAAA/DD/MM");
+          Date date = null;
+      v.setDataVenda(date);
+        assertFalse("Deveria retornar falso", v.validaDataVenda());  
+    }*/
+    
+    @Test
+    public void testValorTotavVenda0(){
+        v.setValorTotal(0);
+        assertFalse("Deveria retornar falso", v.validaValorTotal());  
+    }
+    @Test
+    public void testValorTotavVendaNegativo(){
+        v.setValorTotal(-1);
+        assertFalse("Deveria retornar falso", v.validaValorTotal());  
+    }
+    @Test
+    public void testValorTotavVendaCorreto(){
+        v.setValorTotal(5);
+        assertTrue("Deveria retornar falso", v.validaValorTotal());  
+    }
     
     
 }

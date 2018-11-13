@@ -69,7 +69,7 @@ public class Venda {
     }
     
     public boolean validaDataVenda(){
-        if (Pattern.compile("\\d{2}/\\d{2}/\\d{4}").matcher((CharSequence) dataVenda).find()) {
+        if (dataVenda == null) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
