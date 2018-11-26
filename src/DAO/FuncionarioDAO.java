@@ -10,6 +10,7 @@ import FactoryMethod.Funcionario;
 import com.mysql.jdbc.PreparedStatement;
 import conection.MakeConnection;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -46,5 +47,30 @@ public class FuncionarioDAO {
         }finally{
             MakeConnection.closeConnection(con, stmt);
         }
+    }
+    
+    public boolean chekLogin(String login, String senha) throws ClassNotFoundException{
+        Connection con = MakeConnection.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check = false;
+        
+        try {
+            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM funcionario WHERE idFuncionario = ? AND senha = ?");
+            
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();   
+            
+            if(rs.next()){
+                check = true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Usuario já cadastrado!");
+        }finally{
+            MakeConnection.closeConnection(con, stmt, rs);
+        }
+        
+        return check;
     }
 }
