@@ -30,6 +30,7 @@ public class Home extends javax.swing.JFrame {
    TelaAddSemente telaCadSemente = new TelaAddSemente();
    TelaBalancos telaBalSemente = new TelaBalancos();
    TelaGerirVendas telaGerVendas = new TelaGerirVendas();
+   TelaCadastroFuncionario telaCadFunc = new TelaCadastroFuncionario();
     
    TelaGerirFornecedor telaGerFornecedor = new TelaGerirFornecedor();
    TelaVenderSemente telaVenderSemente = new TelaVenderSemente();
@@ -46,6 +47,7 @@ public class Home extends javax.swing.JFrame {
        telaGerFornecedor.dispose();
        telaVenderSemente.dispose();
        telaAddFornecedor.dispose();
+       telaCadFunc.dispose();
        
    }
   
@@ -92,6 +94,7 @@ public class Home extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        menuCadFuncionario = new javax.swing.JMenuItem();
         menuCadSemente = new javax.swing.JMenuItem();
         menuCadFornecedor = new javax.swing.JMenuItem();
         menuNovaVenda = new javax.swing.JMenuItem();
@@ -244,6 +247,14 @@ public class Home extends javax.swing.JFrame {
         jMenu1.setText("Arquivo");
 
         jMenu5.setText("Novo");
+
+        menuCadFuncionario.setText("Funcionario");
+        menuCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuCadFuncionario);
 
         menuCadSemente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         menuCadSemente.setText("Semente");
@@ -597,18 +608,27 @@ public class Home extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuGerirVendasActionPerformed
 
+    private void menuCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadFuncionarioActionPerformed
+        // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaCadFunc);
+        telaCadFunc.setVisible(true);
+        telaCadFunc.setPosition();
+        
+    }//GEN-LAST:event_menuCadFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -665,6 +685,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAltFornecedor;
     private javax.swing.JMenuItem menuAltSemente;
     private javax.swing.JMenuItem menuCadFornecedor;
+    private javax.swing.JMenuItem menuCadFuncionario;
     private javax.swing.JMenuItem menuCadSemente;
     private javax.swing.JMenuItem menuDelFornecedor;
     private javax.swing.JMenuItem menuDelSemente;
