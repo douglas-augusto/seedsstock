@@ -6,6 +6,7 @@
 package janelas;
 
 import DAO.FornecedorDAO;
+import classes.Facade;
 import classes.Fornecedor;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -465,11 +466,10 @@ public final class PainelAlterarFornecedor extends javax.swing.JFrame {
         f.setEmail(jTextField10f.getText());
         f.setObs(jTextArea2f.getText());
         
-       
-        FornecedorDAO fdao = new FornecedorDAO();
+       Facade f2 = new Facade();
 
         try {
-            fdao.alterar(f);
+            f2.facadeAlteraFornecedorDAO(f);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PainelAlterarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author ramyllo
  */
-public class Semente {
+public class Semente{
         private int idsemente;
 	private  String nome;
 	private  String especie;
@@ -281,6 +281,7 @@ public class Semente {
         }
         return true;
     }
+
     
-	
-}
+
+    }

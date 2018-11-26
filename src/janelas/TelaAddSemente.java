@@ -6,6 +6,7 @@
 package janelas;
 
 import DAO.SementeDAO;
+import classes.Facade;
 import classes.Semente;
 import classes.teclasPermitidas;
 import conection.MakeConnection;
@@ -594,9 +595,9 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
 
         System.out.println("teste ");
         
-        SementeDAO dao = new SementeDAO();
+        Facade f = new Facade();
         try {
-            dao.salvar(s);
+            f.facadeSalvarSementeDAO(s);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaAddSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
