@@ -9,7 +9,7 @@ import classes.Fornecedor;
 import classes.Semente;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +30,9 @@ public class FornecedorDAO {
 
     public boolean salvar(Fornecedor f) throws ClassNotFoundException, SQLException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+//        Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -73,14 +75,16 @@ public class FornecedorDAO {
             return false;
 
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
 
     }
 
     public List<Fornecedor> read(String sql) throws ClassNotFoundException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
 
         ResultSet rs = null;
@@ -113,7 +117,7 @@ public class FornecedorDAO {
         } catch (SQLException ex) {
             Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            MakeConnection.closeConnection(con, stmt, rs);
+            MakeConnectionSingleton2.closeConnection(con, stmt, rs);
         }
 
         return arrayFornecedor;
@@ -121,7 +125,9 @@ public class FornecedorDAO {
 
     public boolean alterar(Fornecedor f) throws ClassNotFoundException, SQLException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -158,14 +164,17 @@ public class FornecedorDAO {
             return false;
 
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
 
     }
 
     public boolean excluir(int id) throws ClassNotFoundException {
 
-        Connection con = MakeConnection.getConnection();
+        
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -185,7 +194,7 @@ public class FornecedorDAO {
             System.out.println(ex);
             return false;
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
     }
 }

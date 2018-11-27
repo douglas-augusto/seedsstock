@@ -6,7 +6,7 @@
 package DAO;
 
 import classes.Semente;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,8 +27,9 @@ public class VendaDAO {
     public ArrayList<Venda> arrayVendas = new ArrayList();
 
     public boolean salvar(Venda v) throws ClassNotFoundException, SQLException {
-
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         try {
@@ -50,14 +51,16 @@ public class VendaDAO {
             System.out.println(ex);
            return false; 
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
  
     }
     
      public boolean AtualizarQuantidadeSemente(Semente s) throws ClassNotFoundException, SQLException {
 
-        Connection con = MakeConnection.getConnection();
+         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+         Connection con = conSing.getConnection();
+         //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         try {
@@ -80,14 +83,16 @@ public class VendaDAO {
             return false;
             
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
         
     }
 
     public List<Venda> read(String sql) throws ClassNotFoundException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         ResultSet rs = null;
@@ -112,14 +117,16 @@ public class VendaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            MakeConnection.closeConnection(con, stmt, rs);
+            MakeConnectionSingleton2.closeConnection(con, stmt, rs);
         }
         
         return arrayVendas;
     }
     public Venda readId(int id) throws ClassNotFoundException, SQLException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         Venda v = new Venda();
         id = getLastId();
@@ -140,7 +147,7 @@ public class VendaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            MakeConnection.closeConnection(con, stmt, rs);
+            MakeConnectionSingleton2.closeConnection(con, stmt, rs);
         }
         return v;
     }
@@ -148,7 +155,9 @@ public class VendaDAO {
 
     public boolean excluir(int id) throws ClassNotFoundException {
 
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         try {
@@ -169,7 +178,7 @@ public class VendaDAO {
             return false;
         
         } finally {
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
     
     }
@@ -182,7 +191,9 @@ public class VendaDAO {
     public int getLastId() throws SQLException, ClassNotFoundException{
         //String sql = "SELECT MAX(idsemente) as idsemente FROM sementes";
         String sql = "SELECT * FROM vendas ORDER BY idvenda DESC LIMIT 1";
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = (PreparedStatement) con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         rs.next();

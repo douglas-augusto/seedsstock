@@ -8,7 +8,7 @@ package DAO;
 import FactoryMethod.Admin;
 import FactoryMethod.Funcionario;
 import com.mysql.jdbc.PreparedStatement;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +21,9 @@ import javax.swing.JOptionPane;
 public class FuncionarioDAO {
 
     public void create(Funcionario f) throws ClassNotFoundException{
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         try {
@@ -45,12 +47,14 @@ public class FuncionarioDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario já cadastrado!");
         }finally{
-            MakeConnection.closeConnection(con, stmt);
+            MakeConnectionSingleton2.closeConnection(con, stmt);
         }
     }
     
     public boolean chekLogin(String login, String senha) throws ClassNotFoundException{
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         boolean check = false;
@@ -68,7 +72,7 @@ public class FuncionarioDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario já cadastrado!");
         }finally{
-            MakeConnection.closeConnection(con, stmt, rs);
+            MakeConnectionSingleton2.closeConnection(con, stmt, rs);
         }
         
         return check;
