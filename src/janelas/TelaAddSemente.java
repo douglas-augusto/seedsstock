@@ -9,7 +9,7 @@ import DAO.SementeDAO;
 import classes.Facade;
 import classes.Semente;
 import classes.teclasPermitidas;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -624,7 +624,9 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         
         choice1.removeAll();
         
-        Connection con = MakeConnection.getConnection();
+        MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
+        Connection con = conSing.getConnection();
+        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         ResultSet rs = null;
@@ -645,7 +647,7 @@ public class TelaAddSemente extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(SementeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
-            MakeConnection.closeConnection(con, stmt, rs);
+            MakeConnectionSingleton2.closeConnection(con, stmt, rs);
         }
     
     }

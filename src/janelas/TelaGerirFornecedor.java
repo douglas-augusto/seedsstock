@@ -9,7 +9,7 @@ import DAO.FornecedorDAO;
 import DAO.SementeDAO;
 import classes.Fornecedor;
 import classes.Semente;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;

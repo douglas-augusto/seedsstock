@@ -11,7 +11,7 @@ import DAO.SementeDAO;
 import DAO.VendaDAO;
 import classes.Semente;
 import classes.Venda;
-import conection.MakeConnection;
+import conection.MakeConnectionSingleton2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
