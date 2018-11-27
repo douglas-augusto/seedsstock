@@ -213,6 +213,10 @@ public class Fornecedor {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }
+        if (Pattern.compile("[^0-9]").matcher(telefone).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras"); "^\\d{5}\\-?\\d{3}$" ^[0-9]{5}-[0-9]{3}
+            return false;
+        }
         return true;
     }
     public boolean validaCelularFornecedor(){
@@ -222,6 +226,10 @@ public class Fornecedor {
         }       
         if (Pattern.compile("^\\d{2}-\\d{5}-\\d{4}$").matcher(celular).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
+            return false;
+        }
+        if (Pattern.compile("[^0-9]").matcher(celular).find()) {
+            //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras"); "^\\d{5}\\-?\\d{3}$" ^[0-9]{5}-[0-9]{3}
             return false;
         }
         return true;
@@ -247,7 +255,6 @@ public class Fornecedor {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
             //^[\\p{L}\\p{N}\\._%+-]+@[\\p{L}\\p{N}\\.\\-]+\\.[\\p{L}]{2,}$
-            
         }
         return true;
     }
@@ -257,7 +264,7 @@ public class Fornecedor {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z0-9 !.;,:´`~^Çç?]").matcher(obs).find()) {
+        if (Pattern.compile("[^a-zA-Z0-9 !.;,:´`~^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû?]").matcher(obs).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do Fornecedor deve ter apenas letras");
             return false;
         }

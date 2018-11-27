@@ -144,7 +144,7 @@ public class Semente{
             //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(nome).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(nome).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
@@ -155,7 +155,7 @@ public class Semente{
             //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(origem).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(origem).find()) {
             //JOptionPane.showMessageDialog(null, "O nome do cliente deve ter apenas letras");
             return false;
         }
@@ -167,7 +167,7 @@ public class Semente{
             //JOptionPane.showMessageDialog(null, "O nome da semente deve conter entre 4 e 20 caracteres!", "Erro:", JOptionPane.ERROR_MESSAGE);
             return false;
         }       
-        if (Pattern.compile("[^a-zA-Z ]").matcher(especie).find()) {
+        if (Pattern.compile("[^a-zA-Z ´~`^ÇçÁáàÀÃãÂâÉéÈèÊêÌìÍíÎîÒòÓóÔôÕõÙùÛû]").matcher(especie).find()) {
             //JOptionPane.showMessageDialog(null, "O nome da semente deve ter apenas letras");
             return false;
         }
