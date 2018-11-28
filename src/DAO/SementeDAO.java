@@ -22,11 +22,10 @@ import javax.swing.JOptionPane;
  *
  * @author douglas
  */
-public class SementeDAO implements DaoInterface<Semente> {
+public class SementeDAO {
 
     public ArrayList<Semente> arraySementes = new ArrayList();
 
-    @Override
     public boolean salvar(Semente s) throws ClassNotFoundException, SQLException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -74,7 +73,6 @@ public class SementeDAO implements DaoInterface<Semente> {
 //        
     }
     
-    @Override
     public List<Semente> read(String sql) throws ClassNotFoundException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -158,8 +156,7 @@ public class SementeDAO implements DaoInterface<Semente> {
     }
     
 
-    @Override
-    public boolean alterar(Semente s) throws ClassNotFoundException, SQLException {
+    public boolean Alterar(Semente s) throws ClassNotFoundException, SQLException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
         Connection con = conSing.getConnection();
@@ -212,7 +209,6 @@ public class SementeDAO implements DaoInterface<Semente> {
         return result;
     }
 
-    @Override
     public boolean excluir(int id) throws ClassNotFoundException {
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
         Connection con = conSing.getConnection();
