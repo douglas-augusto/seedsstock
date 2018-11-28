@@ -22,10 +22,11 @@ import classes.Venda;
  *
  * @author Douglas
  */
-public class VendaDAO {
+public class VendaDAO implements DaoInterface<Venda> {
     
     public ArrayList<Venda> arrayVendas = new ArrayList();
 
+    @Override
     public boolean salvar(Venda v) throws ClassNotFoundException, SQLException {
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
         Connection con = conSing.getConnection();
@@ -88,6 +89,7 @@ public class VendaDAO {
         
     }
 
+    @Override
     public List<Venda> read(String sql) throws ClassNotFoundException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -153,6 +155,7 @@ public class VendaDAO {
     }
 
 
+    @Override
     public boolean excluir(int id) throws ClassNotFoundException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -187,7 +190,11 @@ public class VendaDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-
+    @Override
+    public boolean alterar(Venda v) throws Exception{
+        return true;
+    }
+    
     public int getLastId() throws SQLException, ClassNotFoundException{
         //String sql = "SELECT MAX(idsemente) as idsemente FROM sementes";
         String sql = "SELECT * FROM vendas ORDER BY idvenda DESC LIMIT 1";
