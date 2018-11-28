@@ -5,11 +5,9 @@
  */
 package janelas;
 
-import DAO.SementeDAO;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -37,7 +35,7 @@ public class Home extends javax.swing.JFrame {
    TelaAddFornecedor telaAddFornecedor = new TelaAddFornecedor();
   
    TelaGerirSemente telaGerirSemente = new TelaGerirSemente();
-   
+   Sobre sobre = new Sobre();
    
    private void fecharJanelas(){
        telaCadSemente.dispose();
@@ -48,7 +46,7 @@ public class Home extends javax.swing.JFrame {
        telaVenderSemente.dispose();
        telaAddFornecedor.dispose();
        telaCadFunc.dispose();
-       
+       sobre.dispose();
    }
   
 
@@ -444,7 +442,10 @@ public class Home extends javax.swing.JFrame {
 
     private void menuListFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListFornecedorActionPerformed
         // TODO add your handling code here:
-       
+        fecharJanelas();
+        painelCentral.add(telaGerFornecedor);
+        telaGerFornecedor.setVisible(true);
+        telaGerFornecedor.setPosition();
     }//GEN-LAST:event_menuListFornecedorActionPerformed
 
     private void botaoCadSementeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadSementeMouseClicked
@@ -596,16 +597,27 @@ public class Home extends javax.swing.JFrame {
 
     private void menuVerBalancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerBalancosActionPerformed
         // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(telaBalSemente);
+        telaBalSemente.setVisible(true);
+        telaBalSemente.setPosition();
        
     }//GEN-LAST:event_menuVerBalancosActionPerformed
 
     private void menuAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaActionPerformed
         // TODO add your handling code here:
+        fecharJanelas();
+        painelCentral.add(sobre);
+        sobre.setVisible(true);
+        sobre.setPosition();
     }//GEN-LAST:event_menuAjudaActionPerformed
 
     private void menuGerirVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerirVendasActionPerformed
         // TODO add your handling code here:
-        
+        fecharJanelas();
+        painelCentral.add(telaGerVendas);
+        telaGerVendas.setVisible(true);
+        telaGerVendas.setPosition();
     }//GEN-LAST:event_menuGerirVendasActionPerformed
 
     private void menuCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadFuncionarioActionPerformed
