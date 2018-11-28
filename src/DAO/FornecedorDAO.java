@@ -24,10 +24,11 @@ import javax.swing.JOptionPane;
  *
  * @author douglas
  */
-public class FornecedorDAO {
+public class FornecedorDAO implements DaoInterface<Fornecedor>{
 
     public ArrayList<Fornecedor> arrayFornecedor = new ArrayList();
 
+    @Override
     public boolean salvar(Fornecedor f) throws ClassNotFoundException, SQLException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -123,6 +124,7 @@ public class FornecedorDAO {
         return arrayFornecedor;
     }
 
+    @Override
     public boolean alterar(Fornecedor f) throws ClassNotFoundException, SQLException {
 
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
@@ -169,6 +171,7 @@ public class FornecedorDAO {
 
     }
 
+    @Override
     public boolean excluir(int id) throws ClassNotFoundException {
 
         

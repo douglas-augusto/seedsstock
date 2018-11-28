@@ -22,7 +22,7 @@ import classes.Venda;
  *
  * @author Douglas
  */
-public class VendaDAO {
+public class VendaDAO implements DaoInterface<Venda> {
     
     public ArrayList<Venda> arrayVendas = new ArrayList();
 
@@ -187,7 +187,11 @@ public class VendaDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-
+    @Override
+    public boolean alterar(Venda v) throws Exception{
+        return true;
+    }
+    
     public int getLastId() throws SQLException, ClassNotFoundException{
         //String sql = "SELECT MAX(idsemente) as idsemente FROM sementes";
         String sql = "SELECT * FROM vendas ORDER BY idvenda DESC LIMIT 1";
