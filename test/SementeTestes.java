@@ -1,4 +1,7 @@
 
+import ValidacaoDataSementeStrategy.Ano;
+import ValidacaoDataSementeStrategy.Dia;
+import ValidacaoDataSementeStrategy.Mes;
 import classes.Semente;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -18,10 +21,39 @@ import org.junit.Test;
 public class SementeTestes {
     
     Semente s;
+    Dia d;
+    Mes m;
+    Ano a;
     
     @Before
     public void setUp() {
         s = new Semente();
+        d = new Dia();
+        m = new Mes();
+        a = new Ano();
+    }
+    
+    
+    @Test
+    public void validaDiaSementeStrategy(){
+        assertTrue("Deveria retornar true", d.valida(21, 31));
+        assertFalse("Deveria retornar false", d.valida(38, 31));
+        assertFalse("Deveria retornar false", d.valida(31, 32));
+        assertFalse("Deveria retornar false", d.valida(32, 32));
+    }
+    @Test
+    public void validaAnoSementeStrategy(){
+        assertTrue("Deveria retornar true", a.valida(2011, 2019));
+        assertFalse("Deveria retornar false", a.valida(1772, 2110));
+        assertFalse("Deveria retornar false", a.valida(2000, 2312));
+        assertFalse("Deveria retornar false", a.valida(2312, 1400));
+    }
+    @Test
+    public void validaMesSementeStrategy(){
+        assertTrue("Deveria retornar true", m.valida(8, 12));
+        assertFalse("Deveria retornar false", m.valida(13, 00));
+        assertFalse("Deveria retornar false", m.valida(5, 14));
+        assertFalse("Deveria retornar false", m.valida(14, 3));
     }
     
     @Test

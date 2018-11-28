@@ -13,9 +13,9 @@ public class Dia implements ValidaDataSemente{
 
     @Override
     public boolean valida(int col, int val) {
-    if(col < 1 || col > 31 && val < 1 || val > 31){
+    if((col > 0 && col < 31) && (val > 0 && val < 32)){
            // JOptionPane.showMessageDialog(null, "Dia inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return true;
         }
         return false;
     }

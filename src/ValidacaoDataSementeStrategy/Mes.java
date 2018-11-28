@@ -13,9 +13,9 @@ public class Mes implements ValidaDataSemente{
 
     @Override
     public boolean valida(int col, int val) {
-        if(col < 1 || col > 12 && val < 1 || val > 12){
+        if((col > 0 && col < 13) && (val > 0 && val < 13)){
            // JOptionPane.showMessageDialog(null, "Dia inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return true;
         }
         return false;
     }

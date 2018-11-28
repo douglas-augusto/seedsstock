@@ -11,11 +11,13 @@ package ValidacaoDataSementeStrategy;
  */
 public class Ano implements ValidaDataSemente{
 
+    public int ano;
+    
     @Override
     public boolean valida(int col, int val) {
-        if(col < 1999 || col > 2100 && val < 1999 || val > 2100){
+        if((col > 1999 && col < 2018) && (val > 2018 && val < 2050)){
            // JOptionPane.showMessageDialog(null, "Dia inválido!", "Erro:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return true;
         }
         return false;
     }
