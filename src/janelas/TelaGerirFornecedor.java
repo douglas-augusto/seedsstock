@@ -6,17 +6,9 @@
 package janelas;
 
 import DAO.FornecedorDAO;
-import DAO.SementeDAO;
 import classes.Fornecedor;
-import classes.Semente;
-import conection.MakeConnectionSingleton2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -275,7 +267,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
         ArrayList<Fornecedor> array = (ArrayList<Fornecedor>) f.read(sql);
 
         arrayF_aux = array;
-
+   
         for (int i = 0; i < array.size(); i++) {
             linha[0] = Integer.toString(array.get(i).getIdfornecedor());
             linha[1] = array.get(i).getNome();
@@ -283,7 +275,7 @@ public class TelaGerirFornecedor extends javax.swing.JInternalFrame {
             linha[3] = array.get(i).getEmail();
             dtmFornecedor.addRow(linha);
         }
-      
+  
         jTable1.setModel(dtmFornecedor);
         dtmFornecedor.fireTableDataChanged();
     }

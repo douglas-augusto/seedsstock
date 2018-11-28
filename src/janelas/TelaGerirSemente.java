@@ -5,18 +5,10 @@
  */
 package janelas;
 
-import DAO.FornecedorDAO;
 import DAO.SementeDAO;
-import classes.Fornecedor;
 import classes.Semente;
-import conection.MakeConnectionSingleton2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,9 +68,6 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaSementesGeral = new javax.swing.JTable();
-        botaoVisualizarDetalhes = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        areaDetalhes = new javax.swing.JTextArea();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -154,12 +143,6 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabelaSementesGeral);
 
-        botaoVisualizarDetalhes.setText("Visualizar mais detalhes");
-
-        areaDetalhes.setColumns(20);
-        areaDetalhes.setRows(5);
-        jScrollPane2.setViewportView(areaDetalhes);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,12 +157,7 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoApagarSemente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botaoVisualizarDetalhes)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,12 +166,8 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botaoVisualizarDetalhes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoAlterarSemente)
                     .addComponent(botaoApagarSemente)
@@ -277,17 +251,14 @@ public class TelaGerirSemente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoAlterarSementeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaDetalhes;
     private javax.swing.JButton botaoAlterarSemente;
     private javax.swing.JButton botaoApagarSemente;
-    private javax.swing.JButton botaoVisualizarDetalhes;
     private javax.swing.JTextField campoBuscaSemente;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelaSementesGeral;
     // End of variables declaration//GEN-END:variables
 
