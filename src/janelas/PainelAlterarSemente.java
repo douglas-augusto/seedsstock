@@ -6,6 +6,7 @@
 package janelas;
 
 import DAO.SementeDAO;
+import classes.Facade;
 import classes.Semente;
 import classes.teclasPermitidas;
 import conection.MakeConnectionSingleton2;
@@ -645,10 +646,9 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
         s.setCondicoes_plantil(jTextArea1.getText());
         s.setObservacoes(jTextArea2.getText());
 
-        SementeDAO sdao = new SementeDAO();
-        
+        Facade f = new Facade();
         try {
-            sdao.Alterar(s);
+            f.facadeAlterarSementeDAO(s);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PainelAlterarSemente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -663,7 +663,6 @@ public class PainelAlterarSemente extends javax.swing.JFrame {
         
         MakeConnectionSingleton2 conSing = MakeConnectionSingleton2.getInstancy();
         Connection con = conSing.getConnection();
-        //Connection con = MakeConnectionSingleton2.getConnection();
         PreparedStatement stmt = null;
         
         ResultSet rs = null;

@@ -7,6 +7,7 @@ package janelas;
 
 import DAO.SementeDAO;
 import DAO.VendaDAO;
+import classes.Facade;
 import classes.Semente;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -388,13 +389,15 @@ public class TelaVenderSemente extends javax.swing.JInternalFrame {
         v.setDataVenda(dataSql);
         v.setSementes(sementes);
         
-        VendaDAO dao = new VendaDAO();
+        //VendaDAO dao = new VendaDAO();
+        Facade f = new Facade();
         
         try {
             int dialogButton = JOptionPane.YES_NO_OPTION;   
             int dialogResult = JOptionPane.showConfirmDialog(this,"Lista de compras:\n\n"+ lista, "Deseja confirma sua compra?", dialogButton);
             if(dialogResult == 0) {
-                dao.salvar(v);
+                f.facadeSalvarVendaDAO(v);
+                //dao.salvar(v);
                 JOptionPane.showMessageDialog(rootPane, "Venda realizada com Sucesso!");
    
             } else {

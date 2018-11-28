@@ -9,6 +9,7 @@ import DAO.AdminDAO;
 import DAO.FornecedorDAO;
 import DAO.FuncionarioDAO;
 import DAO.SementeDAO;
+import DAO.VendaDAO;
 import FactoryMethod.Admin;
 import FactoryMethod.Funcionario;
 import java.sql.SQLException;
@@ -21,27 +22,41 @@ public class Facade {
     Fornecedor f;
     Semente s;
     Admin a;
-    FuncionarioDAO fu;
+    FuncionarioDAO fuDAO;
     SementeDAO semDAO;
     FornecedorDAO forDAO;
     AdminDAO adao;
+    VendaDAO vDAO;
     
     
     public Facade(){
         f = new Fornecedor();
         s = new Semente();
         a = new Admin();
-        fu = new FuncionarioDAO();
+        fuDAO = new FuncionarioDAO();
         semDAO = new SementeDAO();
         forDAO = new FornecedorDAO();
         adao = new AdminDAO();
+        vDAO = new VendaDAO();
         
+    }
+    
+    public void facadeSalvarVendaDAO (Venda v) throws ClassNotFoundException, SQLException{
+        vDAO.salvar(v);
+        System.out.println("Venda registrada no banco");
     }
     
     public void facadeSalvarSementeDAO(Semente s) throws ClassNotFoundException, SQLException{
         semDAO.salvar(s);
         System.out.println("Semente salva no Banco");
     }
+    
+    
+    public void facadeAlterarSementeDAO(Semente s) throws ClassNotFoundException, SQLException{
+        semDAO.alterar(s);
+        System.out.println("Semente alterada no banco");
+    }
+    
     
     public void facadeValidaSemente(){
         System.out.println("Validando semente");
@@ -61,18 +76,16 @@ public class Facade {
         forDAO.alterar(f);
         System.out.println("Fornecedor alterado no banco.");
     }
-    
-    
-    public void facadeCriaFuncionario(Funcionario f) throws ClassNotFoundException{
-        fu.create(f);
-    }
-    
+       
     
     public void facadeCriarUsuarioAdmin() throws ClassNotFoundException{
         System.out.println("Criando adm");
         adao.create(a);
     }
     
-   
+    public void facadeSalvaFuncionarioDAO (Funcionario f) throws ClassNotFoundException{
+        fuDAO.create(f);
+        System.out.println("Funcionario criado no banco");
+    }
     
 }

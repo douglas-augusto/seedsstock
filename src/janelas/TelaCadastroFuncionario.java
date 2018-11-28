@@ -36,7 +36,6 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
     public TelaCadastroFuncionario() {
         initComponents();
         setTitle("Cadastrar Funcionario");
-        setBounds(100, 100, 800, 600);
     }
 
     /**
@@ -74,6 +73,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         campoEmailFuncionario = new javax.swing.JTextField();
         botaoCadastrarFuncionario = new javax.swing.JButton();
+        botaoFechar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -204,10 +204,19 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        botaoCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save.png"))); // NOI18N
         botaoCadastrarFuncionario.setText("Cadastrar Funcionário");
         botaoCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCadastrarFuncionarioActionPerformed(evt);
+            }
+        });
+
+        botaoFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        botaoFechar.setText("Fechar");
+        botaoFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoFecharActionPerformed(evt);
             }
         });
 
@@ -217,10 +226,15 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botaoCadastrarFuncionario)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(botaoCadastrarFuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoFechar)
+                        .addGap(95, 95, 95))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,8 +242,10 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoCadastrarFuncionario)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCadastrarFuncionario)
+                    .addComponent(botaoFechar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -290,8 +306,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         
         if(f.validarFuncionario()){
             try {
-                fac.facadeCriaFuncionario(f);
-                //dao.create(f);
+                fac.facadeSalvaFuncionarioDAO(f);
                 //campoTextoCadUsuario.setText("");
                 //campoSenhaCadUsuario.setText("");
             } catch (ClassNotFoundException ex) {
@@ -305,9 +320,15 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_botaoCadastrarFuncionarioActionPerformed
 
+    private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_botaoFecharActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrarFuncionario;
+    private javax.swing.JButton botaoFechar;
     private javax.swing.JTextField campoBairroFuncionario;
     private javax.swing.JTextField campoCEPFuncionario;
     private javax.swing.JTextField campoCPFFuncionario;
